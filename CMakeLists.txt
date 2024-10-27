@@ -45,6 +45,10 @@ include(cmake/Options.cmake)
 add_executable(${PROJECT_NAME}
     main.cpp
     generated/src/Helper.cpp
+        Models/Vehicle.h
+        Models/Driver.h
+        Models/Route.h
+        Models/FleetManager.h
 )
 
 include(cmake/CompilerFlags.cmake)
