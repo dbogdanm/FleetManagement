@@ -1,14 +1,20 @@
 #ifndef HELPER_H
 #define HELPER_H
+
 #include <vector>
 #include <fstream>
 #include <string>
+#include <iostream>
+#include <filesystem>
 #include "Driver.h"
+
+using namespace std;
+namespace fs = filesystem;
 
 class Helper
 {
 public:
-    static vector<Driver>  ReadDriverFromFile()
+    static vector<Driver> ReadDriverFromFile()
     {
         ifstream file(DriverFilePath);
         if (!file)
@@ -38,7 +44,6 @@ public:
         file.close();
         return drivers;
     }
-
 
     static vector<Route> ReadRouteFromFile()
     {
@@ -102,34 +107,26 @@ public:
         return vehicles;
     }
 
-
-
-
-
 private:
-    static const string DriverFilePath;;
+    static const fs::path DriverFilePath;
     static const string DriverFileNotFound;
     static const string DriverReadError;
     static const string RouteReadError;
     static const string RouteFileNotFound;
-    static const string RouteFilePath;
-    static const string VehicleFilePath;
+    static const fs::path RouteFilePath;
+    static const fs::path VehicleFilePath;
     static const string VehicleFileNotFound;
     static const string VehicleReadError;
-
 };
 
-
-const string Helper::DriverFilePath = "C:\\Users\\gicap\\OneDrive\\Desktop\\OOP\\Project\\Driver.txt";
+const fs::path Helper::DriverFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Driver.txt)";
 const string Helper::DriverFileNotFound = "Driver.txt not found";
 const string Helper::DriverReadError = "Error while reading from Driver.txt";
 const string Helper::RouteReadError = "Error while reading from Routes.txt";
 const string Helper::RouteFileNotFound = "Routes.txt not found";
-const string Helper::RouteFilePath = "C:\\Users\\gicap\\OneDrive\\Desktop\\OOP\\Project\\Routes.txt";
-const string Helper::VehicleFilePath = "C:\\Users\\gicap\\OneDrive\\Desktop\\OOP\\Project\\Vehicle.txt";
+const fs::path Helper::RouteFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Routes.txt)";
+const fs::path Helper::VehicleFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Vehicle.txt)";
 const string Helper::VehicleFileNotFound = "Vehicle.txt not found";
 const string Helper::VehicleReadError = "Error while reading from Vehicle.txt";
 
-
-
-#endif //HELPER_H
+#endif // HELPER_H
