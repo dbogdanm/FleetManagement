@@ -8,14 +8,14 @@ class Vehicle
     private:
 
     int vin;
-    string name;
+    string model;
     int kilometers;
     string brand;
 
 public:
     Vehicle(int vin, string name, int kilometers, string brand)
         : vin(vin),
-          name(std::move(name)),
+          model(std::move(name)),
           kilometers(kilometers),
           brand(std::move(brand))
     {
@@ -24,7 +24,7 @@ public:
     Vehicle(const Vehicle &other)
     {
         vin = other.vin;
-        name = other.name;
+        model = other.model;
         kilometers = other.kilometers;
         brand = other.brand;
     }
@@ -32,7 +32,7 @@ public:
     Vehicle& operator=(const Vehicle &other)
     {
         vin = other.vin;
-        name = other.name;
+        model = other.model;
         kilometers = other.kilometers;
         brand = other.brand;
         return *this;
@@ -40,10 +40,10 @@ public:
 
     friend ostream& operator<<(ostream& os, const Vehicle& vehicle)
     {
-        os << "Driver id: " << vehicle.vin << "\n";
-        os << "Driver name: " << vehicle.name << "\n";
-        os << "Driver phone: " << vehicle.kilometers << "\n";
-        os << "Driver number of hours: " << vehicle.brand << "\n";
+        os << "Vehicle vin: " << vehicle.vin << "\n";
+        os << "Vehicle : " << vehicle.model << "\n";
+        os << "Vehicle mileage: " << vehicle.kilometers << "\n";
+        os << "Vehicle brand: " << vehicle.brand << "\n";
         return os;
     }
 

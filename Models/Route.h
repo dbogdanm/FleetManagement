@@ -41,10 +41,10 @@ public:
 
     friend ostream& operator<<(ostream& os, const Route& route)
     {
-        os << "Driver id: " << route.id << "\n";
-        os << "Driver name: " << route.distance << "\n";
-        os << "Driver phone: " << route.startingPoint << "\n";
-        os << "Driver number of hours: " << route.endingPoint << "\n";
+        os << "Route id: " << route.id << "\n";
+        os << "Route distance: " << route.distance << "\n";
+        os << "Route starting point: " << route.startingPoint << "\n";
+        os << "Route ending point: " << route.endingPoint << "\n";
         return os;
     }
 

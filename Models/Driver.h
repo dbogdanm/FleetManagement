@@ -2,6 +2,7 @@
 #define DRIVER_H
 #include <utility>
 #include <iostream>
+
 using namespace std;
 
 class Driver
@@ -21,7 +22,7 @@ public:
     {
     }
 
-private:
+
     Driver(const Driver &other)
     {
         id = other.id;

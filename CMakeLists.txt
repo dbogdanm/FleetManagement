@@ -49,6 +49,7 @@ add_executable(${PROJECT_NAME}
         Models/Driver.h
         Models/Route.h
         Models/FleetManager.h
+        Models/Helper.h
 )
 
 include(cmake/CompilerFlags.cmake)
