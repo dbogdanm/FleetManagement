@@ -1,8 +1,7 @@
 FleetManagement
 
 ## Descriere proiect
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+A C++ application for fleet management, designed for tracking and managing drivers, vehicles, and routes efficiently. The project supports reading data from files(only for the moment), adding, updating, and removing entities, as well as calculating route distances and tracking vehicle mileage and driver hours. 
 ## Milestone #0
 
 - [ ] Nume proiect (poate fi schimbat ulterior)
