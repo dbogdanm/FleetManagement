@@ -1,6 +1,7 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 #include <utility>
+
 using namespace std;
 
 class Vehicle
@@ -41,10 +42,22 @@ public:
     friend ostream& operator<<(ostream& os, const Vehicle& vehicle)
     {
         os << "Vehicle vin: " << vehicle.vin << "\n";
-        os << "Vehicle : " << vehicle.model << "\n";
+        os << "Vehicle model: " << vehicle.model << "\n";
         os << "Vehicle mileage: " << vehicle.kilometers << "\n";
         os << "Vehicle brand: " << vehicle.brand << "\n";
         return os;
+    }
+
+
+    int updateKM(int newKilometers)
+    {
+        kilometers = newKilometers;
+        return kilometers;
+    }
+
+    bool operator==(const Vehicle& other) const
+    {
+        return vin == other.vin;
     }
 
     ~Vehicle() = default;

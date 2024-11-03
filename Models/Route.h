@@ -48,8 +48,28 @@ public:
         return os;
     }
 
-    ~Route()
-    = default;
+    int getDistance(int startId, int endId) const
+    {
+        if(startId == id && endId == distance)
+        {
+            return distance;
+        }
+        else
+        {
+            cout << "Route does not match the given parameters" << endl;
+            return -1;
+        }
+    }
+
+    bool operator==(const Route& other) const
+    {
+        return id == other.id && distance == other.distance && startingPoint == other.startingPoint && endingPoint == other.endingPoint;
+    }
+
+
+    ~Route()= default;
+
+
 
 };
 

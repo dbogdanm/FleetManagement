@@ -49,6 +49,17 @@ public:
         return os;
     }
 
+    int updateNumberOfHours(int newNumberOfHours)
+    {
+        numberOfHours = newNumberOfHours;
+        return numberOfHours;
+    }
+
+    bool operator==(const Driver &other) const
+    {
+        return id == other.id;
+    }
+
     ~Driver() = default;
 
 };
