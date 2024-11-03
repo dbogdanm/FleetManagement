@@ -5,7 +5,7 @@ A C++ application for fleet management, designed for tracking and managing drive
 ## Milestone #0
 
 - [ ] FleetManagement
-- [ ] FleetEase app
+- [ ] `FleetEase app`
 
 ## Milestone #1
 

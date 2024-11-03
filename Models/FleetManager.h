@@ -42,7 +42,16 @@ public:
         return os;
     }
 
-
+    FleetManager& operator=(const FleetManager &other)
+    {
+        if (this != &other)
+        {
+            drivers = other.drivers;
+            vehicles = other.vehicles;
+            routes = other.routes;
+        }
+        return *this;
+    }
 
     void addDriver(const Driver &driver)
     {
@@ -59,19 +68,19 @@ public:
         routes.push_back(route);
     }
 
-    void removeDriver(const Driver &driver)
+    void removeDriver(int id)
     {
-        drivers.erase(remove(drivers.begin(), drivers.end(), driver), drivers.end());
+        drivers.erase(remove_if(drivers.begin(), drivers.end(), [id](const Driver &driver) { return driver.GetId() == id; }), drivers.end());
     }
 
-    void removeVehicle(const Vehicle &vehicle)
+    void removeVehicle(int index)
     {
-        vehicles.erase(remove(vehicles.begin(), vehicles.end(), vehicle), vehicles.end());
+        vehicles.erase(remove_if(vehicles.begin(), vehicles.end(), [index](const Vehicle &vehicle) { return vehicle.GetVin() == index; }), vehicles.end());
     }
 
-    void removeRoute(const Route &route)
+    void removeRoute(int index)
     {
-        routes.erase(remove(routes.begin(), routes.end(), route), routes.end());
+        routes.erase(remove_if(routes.begin(), routes.end(), [index](const Route &route) { return route.GetId() == index; }), routes.end());
     }
 
     vector<Driver> GetDrivers() const
@@ -88,6 +97,20 @@ public:
     {
         return routes;
     }
+
+    Driver FindDriverById(int id) const
+    {
+        for (const Driver &driver : drivers)
+        {
+            if (driver.GetId() == id)
+            {
+                cout << "Driver found!" << endl;
+                return driver; cout<< '\n';
+            }
+        }
+        cout<< "Driver not found" << endl;
+    }
+
 
     ~FleetManager() = default;
     //vector is already self managing its memory

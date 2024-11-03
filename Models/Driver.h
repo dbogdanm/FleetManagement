@@ -60,6 +60,11 @@ public:
         return id == other.id;
     }
 
+    int GetId() const
+    {
+        return id;
+    }
+
     ~Driver() = default;
 
 };

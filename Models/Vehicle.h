@@ -61,6 +61,11 @@ public:
         return vin == other.vin;
     }
 
+    int GetVin() const
+    {
+        return vin;
+    }
+
 
     ~Vehicle() = default;
         //string is already self managing its memory

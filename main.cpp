@@ -17,9 +17,19 @@ vector<Vehicle> vehicles = Helper::ReadVehicleFromFile();
 
     FleetManager fleetManager(drivers, vehicles, routes);
 
-    fleetManager.removeVehicle(vehicles[0]);
+    fleetManager.removeDriver(4);
+    //fleetManager.removeVehicle(5);
     fleetManager.addVehicle(Vehicle(1, "Toyota", 1345, "Camry"));
-    
+    fleetManager.removeVehicle(1234);
+
+    fleetManager.removeRoute(0);
+    fleetManager.removeRoute(1);
+    fleetManager.removeRoute(2);
+
+    fleetManager.FindDriverById(3);
+
+
+
 cout << fleetManager << endl;
 
 

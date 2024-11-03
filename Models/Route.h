@@ -66,6 +66,11 @@ public:
         return id == other.id && distance == other.distance && startingPoint == other.startingPoint && endingPoint == other.endingPoint;
     }
 
+    int GetId() const
+    {
+        return id;
+    }
+
 
     ~Route()= default;
 
