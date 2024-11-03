@@ -1,6 +1,7 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 #include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -59,6 +60,7 @@ public:
     {
         return vin == other.vin;
     }
+
 
     ~Vehicle() = default;
         //string is already self managing its memory

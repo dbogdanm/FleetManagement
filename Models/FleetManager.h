@@ -74,6 +74,21 @@ public:
         routes.erase(remove(routes.begin(), routes.end(), route), routes.end());
     }
 
+    vector<Driver> GetDrivers() const
+    {
+        return drivers;
+    }
+
+    vector<Vehicle> GetVehicles() const
+    {
+        return vehicles;
+    }
+
+    vector<Route> GetRoutes() const
+    {
+        return routes;
+    }
+
     ~FleetManager() = default;
     //vector is already self managing its memory
 
