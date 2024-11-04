@@ -68,20 +68,23 @@ public:
         routes.push_back(route);
     }
 
-    void removeDriver(int id)
+    void removeDriverById(int id)
     {
         drivers.erase(remove_if(drivers.begin(), drivers.end(), [id](const Driver &driver) { return driver.GetId() == id; }), drivers.end());
     }
 
-    void removeVehicle(int index)
+    void removeVehicleByVin(int index)
     {
         vehicles.erase(remove_if(vehicles.begin(), vehicles.end(), [index](const Vehicle &vehicle) { return vehicle.GetVin() == index; }), vehicles.end());
     }
 
-    void removeRoute(int index)
+    void removeRouteById(int routeId)
     {
-        routes.erase(remove_if(routes.begin(), routes.end(), [index](const Route &route) { return route.GetId() == index; }), routes.end());
+        routes.erase(remove_if(routes.begin(), routes.end(),
+                   [routeId](const Route &route) { return route.GetId() == routeId; }),
+                   routes.end());
     }
+
 
     vector<Driver> GetDrivers() const
     {

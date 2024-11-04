@@ -61,11 +61,11 @@ public:
         }
     }
 
-    bool operator==(const Route& other) const
+    /*bool operator==(const Route& other) const
     {
         return id == other.id && distance == other.distance && startingPoint == other.startingPoint && endingPoint == other.endingPoint;
     }
-
+*/
     int GetId() const
     {
         return id;

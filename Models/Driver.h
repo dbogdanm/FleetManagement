@@ -65,6 +65,11 @@ public:
         return id;
     }
 
+    int GetNumberOfHours() const
+    {
+        return numberOfHours;
+    }
+
     ~Driver() = default;
 
 };

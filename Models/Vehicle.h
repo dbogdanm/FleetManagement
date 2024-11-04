@@ -66,6 +66,11 @@ public:
         return vin;
     }
 
+    int GetKilometers() const
+    {
+        return kilometers;
+    }
+
 
     ~Vehicle() = default;
         //string is already self managing its memory

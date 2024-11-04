@@ -119,14 +119,16 @@ private:
     static const string VehicleReadError;
 };
 
-const fs::path Helper::DriverFilePath = R"(C:\Users\ripip\Desktop\OOP_cLion\Driver.txt)";
+const fs::path Helper::DriverFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Driver.txt)";
+const fs::path Helper::RouteFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Routes.txt)";
+const fs::path Helper::VehicleFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Vehicle.txt)";
+
 const string Helper::DriverFileNotFound = "Driver.txt not found";
+const string Helper::RouteFileNotFound = "Routes.txt not found";
+const string Helper::VehicleFileNotFound = "Vehicle.txt not found";
+
 const string Helper::DriverReadError = "Error while reading from Driver.txt";
 const string Helper::RouteReadError = "Error while reading from Routes.txt";
-const string Helper::RouteFileNotFound = "Routes.txt not found";
-const fs::path Helper::RouteFilePath = R"(C:\Users\ripip\Desktop\OOP_cLion\Routes.txt)";
-const fs::path Helper::VehicleFilePath = R"(C:\Users\ripip\Desktop\OOP_cLion\Vehicle.txt)";
-const string Helper::VehicleFileNotFound = "Vehicle.txt not found";
 const string Helper::VehicleReadError = "Error while reading from Vehicle.txt";
 
 #endif // HELPER_H
