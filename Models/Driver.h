@@ -3,18 +3,17 @@
 #include <utility>
 #include <iostream>
 
-using namespace std;
 
 class Driver
 {
 private:
     int id;
-    string name;
-    string phone;
+    std::string name;
+    std::string phone;
     int numberOfHours;
 
 public:
-    Driver(int id, string name, string phone, int number_of_hours)
+    Driver(int id, std::string name, std::string phone, int number_of_hours)
         : id(id),
           name(std::move(name)),
           phone(std::move(phone)),
@@ -40,7 +39,7 @@ public:
         return *this;
     }
 
-    friend ostream& operator<<(ostream& os, const Driver& driver)
+    friend std::ostream& operator<<(std::ostream& os, const Driver& driver)
     {
         os << "Driver id: " << driver.id << "\n";
         os << "Driver name: " << driver.name << "\n";

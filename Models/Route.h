@@ -3,18 +3,18 @@
 #include <string>
 #include <utility>
 #include <iostream>
-using namespace std;
+
 
 class Route
 {
 private:
     int id;
     int distance;
-    string startingPoint;
-    string endingPoint;
+    std::string startingPoint;
+    std::string endingPoint;
 
 public:
-    Route(int id, int distance, string starting_point, string ending_point)
+    Route(int id, int distance, std::string starting_point, std::string ending_point)
         : id(id),
           distance(distance),
           startingPoint(std::move(starting_point)),
@@ -39,7 +39,7 @@ public:
         return *this;
     }
 
-    friend ostream& operator<<(ostream& os, const Route& route)
+    friend std::ostream& operator<<(std::ostream& os, const Route& route)
     {
         os << "Route id: " << route.id << "\n";
         os << "Route distance: " << route.distance << "\n";
@@ -56,7 +56,7 @@ public:
         }
         else
         {
-            cout << "Route does not match the given parameters" << endl;
+            std::cout << "Route does not match the given parameters" << std::endl;
             return -1;
         }
     }

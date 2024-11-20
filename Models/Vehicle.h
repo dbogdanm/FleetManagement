@@ -3,19 +3,18 @@
 #include <utility>
 #include <vector>
 
-using namespace std;
 
 class Vehicle
 {
     private:
 
     int vin;
-    string model;
+    std::string model;
     int kilometers;
-    string brand;
+    std::string brand;
 
 public:
-    Vehicle(int vin, string name, int kilometers, string brand)
+    Vehicle(int vin, std::string name, int kilometers, std::string brand)
         : vin(vin),
           model(std::move(name)),
           kilometers(kilometers),
@@ -40,7 +39,7 @@ public:
         return *this;
     }
 
-    friend ostream& operator<<(ostream& os, const Vehicle& vehicle)
+    friend std::ostream& operator<<(std::ostream& os, const Vehicle& vehicle)
     {
         os << "Vehicle vin: " << vehicle.vin << "\n";
         os << "Vehicle model: " << vehicle.model << "\n";

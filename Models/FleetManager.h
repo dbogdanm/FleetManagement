@@ -8,36 +8,35 @@
 #include "Vehicle.h"
 #include "Helper.h"
 
-using namespace std;
 
 class FleetManager
 {
 private:
-    vector<Driver> drivers;
-    vector<Vehicle> vehicles;
-    vector<Route> routes;
+    std::vector<Driver> drivers;
+    std::vector<Vehicle> vehicles;
+    std::vector<Route> routes;
 
 public:
-    FleetManager(const vector<Driver> &drivers, const vector<Vehicle> &vehicles, const vector<Route> &routes)
+    FleetManager(const std::vector<Driver> &drivers, const std::vector<Vehicle> &vehicles, const std::vector<Route> &routes)
         : drivers(drivers),
           vehicles(vehicles),
           routes(routes)
     {
     }
 
-    friend ostream& operator<<(ostream& os, const FleetManager& fleetManager)
+    friend std::ostream& operator<<(std::ostream& os, const FleetManager& fleetManager)
     {
-        os << "Drivers:" << endl;
+        os << "Drivers:" << std::endl;
         for (const Driver& driver : fleetManager.drivers)
-            os << driver << endl;
+            os << driver << std::endl;
 
-        os << "Vehicles:" << endl;
+        os << "Vehicles:" << std::endl;
         for (const Vehicle& vehicle : fleetManager.vehicles)
-            os << vehicle << endl;
+            os << vehicle << std::endl;
 
-        os << "Routes:" << endl;
+        os << "Routes:" << std::endl;
         for (const Route& route : fleetManager.routes)
-            os << route << endl;
+            os << route << std::endl;
 
         return os;
     }
@@ -86,17 +85,17 @@ public:
     }
 
 
-    vector<Driver> GetDrivers() const
+    std::vector<Driver> GetDrivers() const
     {
         return drivers;
     }
 
-    vector<Vehicle> GetVehicles() const
+    std::vector<Vehicle> GetVehicles() const
     {
         return vehicles;
     }
 
-    vector<Route> GetRoutes() const
+    std::vector<Route> GetRoutes() const
     {
         return routes;
     }
@@ -107,11 +106,11 @@ public:
         {
             if (driver.GetId() == id)
             {
-                cout << "Driver found!" << endl;
-                return driver; cout<< '\n';
+                std::cout << "Driver found!" << std::endl;
+                return driver; std::cout<< '\n';
             }
         }
-        cout<< "Driver not found" << endl;
+        std::cout<< "Driver not found" << std::endl;
     }
 
 

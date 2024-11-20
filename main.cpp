@@ -5,13 +5,13 @@
 #include "Models/Vehicle.h"
 #include "Models/FleetManager.h"
 #include "Models/Helper.h"
-using namespace std;
+
 
 int main()
 {
-    vector<Driver> drivers = Helper::ReadDriverFromFile();
-    vector<Route> routes = Helper::ReadRouteFromFile();
-    vector<Vehicle> vehicles = Helper::ReadVehicleFromFile();
+    std::vector<Driver> drivers = Helper::ReadDriverFromFile();
+    std::vector<Route> routes = Helper::ReadRouteFromFile();
+    std::vector<Vehicle> vehicles = Helper::ReadVehicleFromFile();
 
 
     FleetManager fleetManager(drivers, vehicles, routes);
@@ -34,19 +34,19 @@ int main()
     Vehicle Test(232, "X6", 193232, "BMW");
     Test.updateKM(130000);
     Test.GetVin();
-    cout<<Test.GetKilometers() << endl;
+    std::cout<<Test.GetKilometers() << std::endl;
     Vehicle Test2 = Test;
-    cout<<Test2.GetKilometers() << endl;
+    std::cout<<Test2.GetKilometers() << std::endl;
 
     Driver Test1(20, "Joanna", "0777777777", 0);
     Test1.updateNumberOfHours(230);
-    cout << "NO of hours " << Test1.GetNumberOfHours() << endl;
+    std::cout << "NO of hours " << Test1.GetNumberOfHours() << std::endl;
 
     fleetManager.addDriver(Test1);
 
 
 
-    cout << fleetManager << endl;
+    std::cout << fleetManager << std::endl;
 
 
 
