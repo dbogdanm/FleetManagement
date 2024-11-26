@@ -50,6 +50,14 @@ add_executable(${PROJECT_NAME}
         Models/Route.h
         Models/FleetManager.h
         Models/Helper.h
+        Models/Truck.h
+        Models/VehicleService.h
+        Models/Motorcycle.h
+        Models/Bus.h
+        Exceptions/FleetException.h
+        Exceptions/DriverNotFoundException.h
+        Exceptions/RouteNotFoundException.h
+        Exceptions/VehicleNotFoundException.h
 )
 
 include(cmake/CompilerFlags.cmake)

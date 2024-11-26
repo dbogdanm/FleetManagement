@@ -1,78 +1,68 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
-#include <utility>
-#include <vector>
 
+#include <string>
+#include <iostream>
+#include <memory>
+#include <utility>
 
 class Vehicle
 {
-    private:
 
+protected:
     int vin;
     std::string model;
     int kilometers;
     std::string brand;
 
 public:
-    Vehicle(int vin, std::string name, int kilometers, std::string brand)
-        : vin(vin),
-          model(std::move(name)),
-          kilometers(kilometers),
-          brand(std::move(brand))
-    {
-    }
 
-    Vehicle(const Vehicle &other)
-    {
-        vin = other.vin;
-        model = other.model;
-        kilometers = other.kilometers;
-        brand = other.brand;
-    }
+    Vehicle(int vin, std::string  model, int kilometers, std::string  brand)
+        : vin(vin), model(std::move(model)), kilometers(kilometers), brand(std::move(brand)) {}
 
-    Vehicle& operator=(const Vehicle &other)
-    {
-        vin = other.vin;
-        model = other.model;
-        kilometers = other.kilometers;
-        brand = other.brand;
-        return *this;
-    }
 
-    friend std::ostream& operator<<(std::ostream& os, const Vehicle& vehicle)
+    Vehicle(const Vehicle& other)
+        : vin(other.vin), model(other.model),
+          kilometers(other.kilometers), brand(other.brand) {}
+
+
+    virtual ~Vehicle() = default;
+
+
+    virtual void display() const = 0;
+    virtual void performMaintenance() = 0;
+
+
+    virtual std::unique_ptr<Vehicle> clone() const = 0;
+
+
+    void showInfo() const
     {
-        os << "Vehicle vin: " << vehicle.vin << "\n";
-        os << "Vehicle model: " << vehicle.model << "\n";
-        os << "Vehicle mileage: " << vehicle.kilometers << "\n";
-        os << "Vehicle brand: " << vehicle.brand << "\n";
-        return os;
+        std::cout << "VIN: " << vin << ", Model: " << model
+                  << ", Kilometers: " << kilometers << ", Brand: " << brand << std::endl;
     }
 
 
-    int updateKM(int newKilometers)
-    {
-        kilometers = newKilometers;
-        return kilometers;
-    }
-
-    bool operator==(const Vehicle& other) const
-    {
-        return vin == other.vin;
-    }
-
-    int GetVin() const
+    int getVin() const
     {
         return vin;
     }
 
-    int GetKilometers() const
+protected:
+
+    void swapBase(Vehicle& other) noexcept
     {
-        return kilometers;
+        using std::swap;
+        swap(vin, other.vin);
+        swap(model, other.model);
+        swap(kilometers, other.kilometers);
+        swap(brand, other.brand);
     }
 
+public:
 
-    ~Vehicle() = default;
-        //string is already self managing its memory
+    Vehicle& operator=(const Vehicle& other) = delete;
+
 };
 
-#endif //VEHICLE_H
+#endif

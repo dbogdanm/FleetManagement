@@ -1,8 +1,9 @@
 #ifndef DRIVER_H
 #define DRIVER_H
-#include <utility>
-#include <iostream>
 
+#include <string>
+#include <iostream>
+#include <utility>
 
 class Driver
 {
@@ -12,66 +13,75 @@ private:
     std::string phone;
     int numberOfHours;
 
+    static int totalDrivers;
+
 public:
-    Driver(int id, std::string name, std::string phone, int number_of_hours)
-        : id(id),
-          name(std::move(name)),
-          phone(std::move(phone)),
-          numberOfHours(number_of_hours)
+
+    Driver(int id, std::string  name, std::string  phone, int numberOfHours)
+        : id(id), name(std::move(name)), phone(std::move(phone)), numberOfHours(numberOfHours)
     {
+        ++totalDrivers;
     }
 
 
-    Driver(const Driver &other)
+    ~Driver()
     {
-        id = other.id;
-        name = other.name;
-        phone = other.phone;
-        numberOfHours = other.numberOfHours;
+        --totalDrivers;
     }
 
-    Driver& operator =(const Driver &other)
+
+    Driver(const Driver& other)
+        : id(other.id), name(other.name),
+          phone(other.phone), numberOfHours(other.numberOfHours)
     {
-        id = other.id;
-        name = other.name;
-        phone = other.phone;
-        numberOfHours = other.numberOfHours;
+        ++totalDrivers;
+    }
+
+
+    Driver& operator=(Driver other)
+    { // prin valoare
+        swap(*this, other);
         return *this;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Driver& driver)
+
+    friend void swap(Driver& first, Driver& second) noexcept
     {
-        os << "Driver id: " << driver.id << "\n";
-        os << "Driver name: " << driver.name << "\n";
-        os << "Driver phone: " << driver.phone << "\n";
-        os << "Driver number of hours: " << driver.numberOfHours << "\n";
-        return os;
+        using std::swap;
+        swap(first.id, second.id);
+        swap(first.name, second.name);
+        swap(first.phone, second.phone);
+        swap(first.numberOfHours, second.numberOfHours);
     }
 
-    int updateNumberOfHours(int newNumberOfHours)
-    {
-        numberOfHours = newNumberOfHours;
-        return numberOfHours;
-    }
-
-    bool operator==(const Driver &other) const
-    {
-        return id == other.id;
-    }
-
-    int GetId() const
+    //am nevoie aici de getter pentru ca folosesc functia asta pentru interfata
+    //si decat sa scriu acolo 15 linii de cod mai bine 4 aici (stiu ca mi-ati spus sa sterg getters si setters)
+    int getId() const
     {
         return id;
     }
 
-    int GetNumberOfHours() const
+
+    void updateNumberOfHours(int newNumberOfHours)
     {
-        return numberOfHours;
+        numberOfHours = newNumberOfHours;
     }
 
-    ~Driver() = default;
 
+    void display() const
+    {
+        std::cout << "Driver ID: " << id << ", Name: " << name
+                  << ", Phone: " << phone << ", Hours: " << numberOfHours << std::endl;
+    }
+
+
+    static int getTotalDrivers()
+    {
+        return totalDrivers;
+    }
 };
 
-#endif //DRIVER_H
 
+int Driver::totalDrivers = 0;
+
+#endif

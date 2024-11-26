@@ -2,132 +2,42 @@
 #define HELPER_H
 
 #include <vector>
-#include <fstream>
-#include <string>
-#include <iostream>
-#include <filesystem>
+#include <memory>
 #include "Driver.h"
+#include "Route.h"
+#include "Bus.h"
+#include "Truck.h"
+#include "Motorcycle.h"
 
-namespace fs = std::filesystem;
-
-class Helper
-{
+class Helper {
 public:
     static std::vector<Driver> ReadDriverFromFile()
     {
-        std::ifstream file(DriverFilePath);
-        if (!file)
-        {
-            std::cout << DriverFileNotFound << std::endl;
-            return {};
-        }
-
-        std::vector<Driver> drivers;
-        int numberOfDrivers;
-        file >> numberOfDrivers;
-
-        for (int i = 0; i < numberOfDrivers; i++)
-        {
-            int id, numberOfHours;
-            std::string name, phone;
-            if (file >> id >> name >> phone >> numberOfHours)
-            {
-                drivers.emplace_back(id, name, phone, numberOfHours);
-            }
-            else
-            {
-                std::cout << DriverReadError << i + 1 << std::endl;
-            }
-        }
-
-        file.close();
-        return drivers;
+        return
+        { //nu stiu de ce nu se indenteaza acolada aia bine
+            Driver(1, "Hunter Biden", "0713456791", 347),
+            Driver(2, "Bradley Carter", "0787654321", 118)
+        };
     }
 
     static std::vector<Route> ReadRouteFromFile()
     {
-        std::ifstream file(RouteFilePath);
-        if (!file)
+        // AM RENUNTAT DIN A MAI FOLOSI FISIERE
+        return
         {
-            std::cout << RouteFileNotFound << std::endl;
-            return {};
-        }
-
-        std::vector<Route> routes;
-        int numberOfRoutes;
-        file >> numberOfRoutes;
-
-        for (int i = 0; i < numberOfRoutes; i++)
-        {
-            int id, distance;
-            std::string startingPoint, endingPoint;
-            if (file >> id >> distance >> startingPoint >> endingPoint)
-            {
-                routes.emplace_back(id, distance, startingPoint, endingPoint);
-            }
-            else
-            {
-                std::cout << RouteReadError << i + 1 << std::endl;
-            }
-        }
-
-        file.close();
-        return routes;
+            Route(1, 148, "Ramnicu-Sarat", "Bucharest"),
+            Route(2, 305, "Suceava", "Cluj")
+        };
     }
 
-    static std::vector<Vehicle> ReadVehicleFromFile()
+    static std::vector<std::unique_ptr<Vehicle>> ReadVehicleFromFile()
     {
-        std::ifstream file(VehicleFilePath);
-        if (!file)
-        {
-            std::cout << VehicleFileNotFound << std::endl;
-            return {};
-        }
-
-        std::vector<Vehicle> vehicles;
-        int numberOfVehicles;
-        file >> numberOfVehicles;
-
-        for (int i = 0; i < numberOfVehicles; i++)
-        {
-            int id, kilometers;
-            std::string brand, model;
-            if (file >> id >> model >> kilometers >> brand)
-            {
-                vehicles.emplace_back(id, model, kilometers, brand);
-            }
-            else
-            {
-                std::cout << VehicleReadError << i + 1 << std::endl;
-            }
-        }
-
-        file.close();
+        std::vector<std::unique_ptr<Vehicle>> vehicles;
+        vehicles.emplace_back(std::make_unique<Bus>(101, "Citaro", 345000, "Mercedes-Benz", 73, false));
+        vehicles.emplace_back(std::make_unique<Truck>(102, "S-Series", 320000, "Scania", 21, 38));
+        vehicles.emplace_back(std::make_unique<Motorcycle>(103, "Primavera", 1000, "Vespa", 125.0, false));
         return vehicles;
     }
-
-private:
-    static const fs::path DriverFilePath;
-    static const std::string DriverFileNotFound;
-    static const std::string DriverReadError;
-    static const std::string RouteReadError;
-    static const std::string RouteFileNotFound;
-    static const fs::path RouteFilePath;
-    static const fs::path VehicleFilePath;
-    static const std::string VehicleFileNotFound;
-    static const std::string VehicleReadError;
 };
 
-const fs::path Helper::DriverFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Driver.txt)";
-const fs::path Helper::RouteFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Routes.txt)";
-const fs::path Helper::VehicleFilePath = R"(C:\Users\gicap\OneDrive\Desktop\OOP\Project\Vehicle.txt)";
-
-const std::string Helper::DriverFileNotFound = "Driver.txt not found";
-const std::string Helper::RouteFileNotFound = "Routes.txt not found";
-const std::string Helper::VehicleFileNotFound = "Vehicle.txt not found";
-
-const std::string Helper::DriverReadError = "Error while reading from Driver.txt";
-const std::string Helper::RouteReadError = "Error while reading from Routes.txt";
-const std::string Helper::VehicleReadError = "Error while reading from Vehicle.txt";
-
-#endif // HELPER_H
+#endif

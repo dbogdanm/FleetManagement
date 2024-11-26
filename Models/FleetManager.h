@@ -1,122 +1,176 @@
 #ifndef FLEETMANAGER_H
 #define FLEETMANAGER_H
-#include <iostream>
+
 #include <vector>
+#include <memory>
 #include <algorithm>
+#include <iostream>
 #include "Driver.h"
 #include "Route.h"
 #include "Vehicle.h"
-#include "Helper.h"
-
+#include "Bus.h"
+#include "Truck.h"
+#include "Motorcycle.h"
+#include "C:\Users\gicap\OneDrive\Desktop\OOP\Project\Exceptions\DriverNotFoundException.h"
+#include "C:\Users\gicap\OneDrive\Desktop\OOP\Project\Exceptions\FleetException.h"
+#include "C:\Users\gicap\OneDrive\Desktop\OOP\Project\Exceptions\RouteNotFoundException.h"
+#include "C:\Users\gicap\OneDrive\Desktop\OOP\Project\Exceptions\VehicleNotFoundException.h"
 
 class FleetManager
 {
 private:
     std::vector<Driver> drivers;
-    std::vector<Vehicle> vehicles;
+    std::vector<std::unique_ptr<Vehicle>> vehicles;
     std::vector<Route> routes;
 
 public:
-    FleetManager(const std::vector<Driver> &drivers, const std::vector<Vehicle> &vehicles, const std::vector<Route> &routes)
-        : drivers(drivers),
-          vehicles(vehicles),
-          routes(routes)
+
+    FleetManager(std::vector<Driver> drivers,
+                std::vector<std::unique_ptr<Vehicle>> vehicles,
+                std::vector<Route> routes)
+        : drivers(std::move(drivers)),
+          vehicles(std::move(vehicles)),
+          routes(std::move(routes)) {}
+
+
+    FleetManager(const FleetManager& other)
     {
-    }
+        drivers = other.drivers;
 
-    friend std::ostream& operator<<(std::ostream& os, const FleetManager& fleetManager)
-    {
-        os << "Drivers:" << std::endl;
-        for (const Driver& driver : fleetManager.drivers)
-            os << driver << std::endl;
-
-        os << "Vehicles:" << std::endl;
-        for (const Vehicle& vehicle : fleetManager.vehicles)
-            os << vehicle << std::endl;
-
-        os << "Routes:" << std::endl;
-        for (const Route& route : fleetManager.routes)
-            os << route << std::endl;
-
-        return os;
-    }
-
-    FleetManager& operator=(const FleetManager &other)
-    {
-        if (this != &other)
+        vehicles.clear();
+        for (const auto& v : other.vehicles)
         {
-            drivers = other.drivers;
-            vehicles = other.vehicles;
-            routes = other.routes;
+            vehicles.emplace_back(v->clone());
         }
+        routes = other.routes;
+    }
+
+    // DE SCRIS copy and swap aici
+    FleetManager& operator=(FleetManager other)
+    {
+        swap(*this, other);
         return *this;
     }
 
-    void addDriver(const Driver &driver)
+    // DE IMPLEMENTAT SWAP FUNCTION AICI!!!
+    //nu stiu ce face noexcept, l-am adaugat din clion ca fix pt un warning
+    friend void swap(FleetManager& first, FleetManager& second) noexcept
     {
-        drivers.push_back(driver);
-    }
-
-    void addVehicle(const Vehicle &vehicle)
-    {
-        vehicles.push_back(vehicle);
-    }
-
-    void addRoute(const Route &route)
-    {
-        routes.push_back(route);
-    }
-
-    void removeDriverById(int id)
-    {
-        drivers.erase(remove_if(drivers.begin(), drivers.end(), [id](const Driver &driver) { return driver.GetId() == id; }), drivers.end());
-    }
-
-    void removeVehicleByVin(int index)
-    {
-        vehicles.erase(remove_if(vehicles.begin(), vehicles.end(), [index](const Vehicle &vehicle) { return vehicle.GetVin() == index; }), vehicles.end());
-    }
-
-    void removeRouteById(int routeId)
-    {
-        routes.erase(remove_if(routes.begin(), routes.end(),
-                   [routeId](const Route &route) { return route.GetId() == routeId; }),
-                   routes.end());
-    }
-
-
-    std::vector<Driver> GetDrivers() const
-    {
-        return drivers;
-    }
-
-    std::vector<Vehicle> GetVehicles() const
-    {
-        return vehicles;
-    }
-
-    std::vector<Route> GetRoutes() const
-    {
-        return routes;
-    }
-
-    Driver FindDriverById(int id) const
-    {
-        for (const Driver &driver : drivers)
-        {
-            if (driver.GetId() == id)
-            {
-                std::cout << "Driver found!" << std::endl;
-                return driver; std::cout<< '\n';
-            }
-        }
-        std::cout<< "Driver not found" << std::endl;
+        using std::swap;
+        swap(first.drivers, second.drivers);
+        swap(first.vehicles, second.vehicles);
+        swap(first.routes, second.routes);
     }
 
 
     ~FleetManager() = default;
-    //vector is already self managing its memory
 
+
+    void addDriver(const Driver& driver)
+    {
+        drivers.push_back(driver);
+    }
+
+
+    void removeDriverById(int id)
+    {
+        auto it = std::remove_if(drivers.begin(), drivers.end(),
+                                 [id](const Driver& d)
+                                 {
+                                     return d.getId() == id;
+                                 });
+        if (it == drivers.end())
+        {
+            throw DriverNotFoundException(id);
+        }
+        drivers.erase(it, drivers.end());
+    }
+
+
+    void addRoute(const Route& route)
+    {
+        routes.push_back(route);
+    }
+
+
+    void removeRouteById(int id)
+    {
+        auto it = std::remove_if(routes.begin(), routes.end(),
+                                 [id](const Route& r)
+                                 {
+                                     return r.getId() == id;
+                                 });
+        if (it == routes.end())
+        {
+            throw RouteNotFoundException(id);
+        }
+        routes.erase(it, routes.end());
+    }
+
+
+    void addVehicle(std::unique_ptr<Vehicle> vehicle)
+    {
+        vehicles.emplace_back(std::move(vehicle));
+    }
+
+
+    void removeVehicleByVin(int vin)
+    {
+        auto it = std::remove_if(vehicles.begin(), vehicles.end(),
+                                 [vin](const std::unique_ptr<Vehicle>& v)
+                                 {
+                                     return v->getVin() == vin;
+                                 });
+        if (it == vehicles.end())
+        {
+            throw VehicleNotFoundException(vin);
+        }
+        vehicles.erase(it, vehicles.end());
+    }
+
+
+    void displayFleet() const
+    {
+        std::cout << "=== Fleet Information ===" << std::endl;
+        std::cout << "\nDrivers:" << std::endl;
+
+
+        for (const auto& driver : drivers)
+        {
+            driver.display();
+        }
+        std::cout << "\nVehicles:" << std::endl;
+
+        for (const auto& vehicle : vehicles)
+        {
+            vehicle->display();
+            // dynamic cast pt downcasting
+
+            if (auto bus = dynamic_cast<Bus*>(vehicle.get()))
+            {
+                std::cout << "This is a Bus with seating capacity: " << bus->getSeatingCapacity() << std::endl;
+            }
+
+            else if (auto truck = dynamic_cast<Truck*>(vehicle.get()))
+            {
+                std::cout << "This is a Truck with load capacity of: " << truck->getLoadCapacity() << " tons" << std::endl;
+            }
+
+            else if (auto motorcycle = dynamic_cast<Motorcycle*>(vehicle.get()))
+            {
+                std::cout << "This is a Motorcycle with engine displacement: " << motorcycle->getEngineDisplacement() << "cc" << std::endl;
+            }
+        }
+
+        std::cout << "\nRoutes:" << std::endl;
+
+        for (const auto& route : routes)
+        {
+            route.display();
+        }
+
+        std::cout << "===============================" << std::endl;
+    }
 };
 
-#endif //FLEETMANAGER_H
+#endif // FLEETMANAGER_H

@@ -1,12 +1,14 @@
+// Models/Route.h
 #ifndef ROUTE_H
 #define ROUTE_H
-#include <string>
-#include <utility>
-#include <iostream>
 
+#include <string>
+#include <iostream>
+#include <utility>
 
 class Route
 {
+
 private:
     int id;
     int distance;
@@ -14,68 +16,45 @@ private:
     std::string endingPoint;
 
 public:
-    Route(int id, int distance, std::string starting_point, std::string ending_point)
-        : id(id),
-          distance(distance),
-          startingPoint(std::move(starting_point)),
-          endingPoint(std::move(ending_point))
-    {
-    }
 
-    Route(const Route &other)
-    {
-        id = other.id;
-        distance = other.distance;
-        startingPoint = other.startingPoint;
-        endingPoint = other.endingPoint;
-    }
+    Route(int id, int distance, std::string  startingPoint, std::string  endingPoint)
+        : id(id), distance(distance), startingPoint(std::move(startingPoint)), endingPoint(std::move(endingPoint)) {}
 
-    Route& operator=(const Route &other)
+
+    Route(const Route& other)
+        : id(other.id), distance(other.distance),
+          startingPoint(other.startingPoint), endingPoint(other.endingPoint) {}
+
+
+    Route& operator=(Route other)
     {
-        id = other.id;
-        distance = other.distance;
-        startingPoint = other.startingPoint;
-        endingPoint = other.endingPoint;
+        swap(*this, other);
         return *this;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Route& route)
+
+    friend void swap(Route& first, Route& second) noexcept
     {
-        os << "Route id: " << route.id << "\n";
-        os << "Route distance: " << route.distance << "\n";
-        os << "Route starting point: " << route.startingPoint << "\n";
-        os << "Route ending point: " << route.endingPoint << "\n";
-        return os;
+        using std::swap;
+        swap(first.id, second.id);
+        swap(first.distance, second.distance);
+        swap(first.startingPoint, second.startingPoint);
+        swap(first.endingPoint, second.endingPoint);
     }
 
-    int getDistance(int startId, int endId) const
-    {
-        if(startId == id && endId == distance)
-        {
-            return distance;
-        }
-        else
-        {
-            std::cout << "Route does not match the given parameters" << std::endl;
-            return -1;
-        }
-    }
-
-    /*bool operator==(const Route& other) const
-    {
-        return id == other.id && distance == other.distance && startingPoint == other.startingPoint && endingPoint == other.endingPoint;
-    }
-*/
-    int GetId() const
+    // din nou, am nevoie pt interfata de getters
+    int getId() const
     {
         return id;
     }
 
 
-    ~Route()= default;
-
-
+    void display() const
+    {
+        std::cout << "Route ID: " << id << ", Distance: " << distance
+                  << " km, From: " << startingPoint << " To: " << endingPoint << std::endl;
+    }
 
 };
 
-#endif //ROUTE_H
+#endif
