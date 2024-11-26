@@ -9,20 +9,43 @@
 #include "Truck.h"
 #include "Motorcycle.h"
 
+/**
+ * @class Helper
+ * @brief Provides utility methods for initializing fleet data.
+ *
+ * The Helper class contains static methods that return predefined collections
+ * of drivers, routes, and vehicles. These methods simulate reading data from files
+ * and provide sample data for testing or initialization purposes.
+ */
 class Helper {
 public:
+    /**
+     * @brief Reads a predefined list of drivers.
+     *
+     * Simulates reading driver data from a file and returns a list of drivers
+     * with predefined information.
+     *
+     * @return A vector of Driver objects.
+     */
     static std::vector<Driver> ReadDriverFromFile()
     {
         return
-        { //nu stiu de ce nu se indenteaza acolada aia bine
+        {
             Driver(1, "Hunter Biden", "0713456791", 347),
             Driver(2, "Bradley Carter", "0787654321", 118)
         };
     }
 
+    /**
+     * @brief Reads a predefined list of routes.
+     *
+     * Simulates reading route data from a file and returns a list of routes
+     * with predefined information.
+     *
+     * @return A vector of Route objects.
+     */
     static std::vector<Route> ReadRouteFromFile()
     {
-        // AM RENUNTAT DIN A MAI FOLOSI FISIERE
         return
         {
             Route(1, 148, "Ramnicu-Sarat", "Bucharest"),
@@ -30,6 +53,14 @@ public:
         };
     }
 
+    /**
+     * @brief Reads a predefined list of vehicles.
+     *
+     * Simulates reading vehicle data from a file and returns a list of vehicles
+     * with predefined information. The vehicles are stored as unique pointers.
+     *
+     * @return A vector of unique pointers to Vehicle objects.
+     */
     static std::vector<std::unique_ptr<Vehicle>> ReadVehicleFromFile()
     {
         std::vector<std::unique_ptr<Vehicle>> vehicles;
