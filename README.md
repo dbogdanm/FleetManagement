@@ -2,6 +2,7 @@ FleetManagement
 
 ## Descriere proiect
 A C++ application for fleet management, designed for tracking and managing drivers, vehicles, and routes efficiently. The project supports reading data from files(only for the moment), adding, updating, and removing entities, as well as calculating route distances and tracking vehicle mileage and driver hours. 
+**NOTE: This repository contains only the backend code. If you're looking for the complete app, please refer to [this link](https://github.com/dbogdanm/QT-OOP)**
 ## Milestone #0
 
 - [ ] FleetManagement
