@@ -5,7 +5,7 @@ A C++ application for fleet management, designed for tracking and managing drive
 ## Milestone #0
 
 - [ ] FleetManagement
-- [ ] `FleetEase app` is a fleet management app developed entirely in C++ using the QT framework(check my [other](https://github.com/dbogdanm/QT-OOP) repo ). It provides functionalities like managing vehicles, routes and permissions, making it a comprehensive tool for fleet administration.
+- [ ] `FleetEase app` is a fleet management app developed entirely in C++ using the QT framework (check my [other](https://github.com/dbogdanm/QT-OOP) repo ). It provides functionalities like managing vehicles, routes and permissions, making it a comprehensive tool for fleet administration.
  
 **How can I use it?**
 
