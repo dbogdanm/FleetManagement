@@ -95,7 +95,7 @@ public:
      *
      * @return The unique ID of the route.
      */
-    int getId() const
+    [[nodiscard]] int getId() const
     {
         return id;
     }

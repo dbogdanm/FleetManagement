@@ -117,7 +117,7 @@ public:
      *
      * @return The seating capacity of the bus.
      */
-    int getSeatingCapacity() const
+    [[nodiscard]] int getSeatingCapacity() const
     {
         return seatingCapacity;
     }
@@ -127,7 +127,7 @@ public:
      *
      * @return True if the bus has WiFi, false otherwise.
      */
-    bool getHasWiFi() const
+    [[nodiscard]] bool getHasWiFi() const
     {
         return hasWiFi;
     }

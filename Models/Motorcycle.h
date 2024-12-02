@@ -116,7 +116,7 @@ public:
      *
      * @return A unique pointer to a copy of the Motorcycle.
      */
-    std::unique_ptr<Vehicle> clone() const override
+    [[nodiscard]] std::unique_ptr<Vehicle> clone() const override
     {
         return std::make_unique<Motorcycle>(*this);
     }
@@ -126,7 +126,7 @@ public:
      *
      * @return The engine displacement of the motorcycle in cubic centimeters (cc).
      */
-    double getEngineDisplacement() const
+    [[nodiscard]] double getEngineDisplacement() const
     {
         return engineDisplacement;
     }
@@ -136,7 +136,7 @@ public:
      *
      * @return True if the motorcycle has a sidecar, false otherwise.
      */
-    bool getHasSidecar() const
+    [[nodiscard]] bool getHasSidecar() const
     {
         return hasSidecar;
     }

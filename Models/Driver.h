@@ -112,7 +112,7 @@ public:
      *
      * @return The unique ID of the driver.
      */
-    int getId() const
+    [[nodiscard]] int getId() const
     {
         return id;
     }

@@ -7,7 +7,7 @@ project(oop)
 # set(CMAKE_PROJECT_VERSION_MINOR 0)
 # set(CMAKE_PROJECT_VERSION_PATCH 1)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -43,21 +43,11 @@ include(cmake/Options.cmake)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${PROJECT_NAME}
-    main.cpp
-    generated/src/Helper.cpp
-        Models/Vehicle.h
-        Models/Driver.h
-        Models/Route.h
+        main.cpp
+        generated/src/Helper.cpp
         Models/FleetManager.h
-        Models/Helper.h
-        Models/Truck.h
         Models/VehicleService.h
-        Models/Motorcycle.h
-        Models/Bus.h
-        Exceptions/FleetException.h
-        Exceptions/DriverNotFoundException.h
-        Exceptions/RouteNotFoundException.h
-        Exceptions/VehicleNotFoundException.h
+
 )
 
 include(cmake/CompilerFlags.cmake)

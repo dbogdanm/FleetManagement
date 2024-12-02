@@ -36,7 +36,7 @@ public:
      * This function overrides the `what()` method from std::exception to
      * provide a custom error message.
      */
-    const char* what() const noexcept override
+    [[nodiscard]] const char* what() const noexcept override
     {
         return message.c_str();
     }

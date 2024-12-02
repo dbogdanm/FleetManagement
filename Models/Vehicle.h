@@ -90,7 +90,7 @@ public:
      *
      * @return A unique pointer to a copy of the Vehicle.
      */
-    virtual std::unique_ptr<Vehicle> clone() const = 0;
+    [[nodiscard]] virtual std::unique_ptr<Vehicle> clone() const = 0;
 
     /**
      * @brief Displays basic information about the vehicle.
@@ -108,7 +108,7 @@ public:
      *
      * @return The Vehicle Identification Number (VIN).
      */
-    int getVin() const
+    [[nodiscard]] int getVin() const
     {
         return vin;
     }

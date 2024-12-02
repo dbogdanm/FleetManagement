@@ -116,7 +116,7 @@ public:
      *
      * @return A unique pointer to a copy of the Truck.
      */
-    std::unique_ptr<Vehicle> clone() const override
+    [[nodiscard]] std::unique_ptr<Vehicle> clone() const override
     {
         return std::make_unique<Truck>(*this);
     }
@@ -126,7 +126,7 @@ public:
      *
      * @return The load capacity of the truck in tons.
      */
-    double getLoadCapacity() const
+    [[nodiscard]] double getLoadCapacity() const
     {
         return loadCapacity;
     }
@@ -136,7 +136,7 @@ public:
      *
      * @return The fuel efficiency of the truck in L/100km.
      */
-    double getFuelEfficiency() const
+    [[nodiscard]] double getFuelEfficiency() const
     {
         return fuelEfficiency;
     }
