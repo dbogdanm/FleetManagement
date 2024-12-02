@@ -1,6 +1,6 @@
 FleetManagement
 
-## Project description
+## ✍️Project description
 A C++ application for fleet management, designed for tracking and managing drivers, vehicles, and routes efficiently. The project supports adding, updating, and removing entities, as well as calculating route distances and tracking vehicle mileage and driver hours. 
 
 **NOTE: This repository contains only the backend code. If you're looking for the complete app, please refer to [this link](https://github.com/dbogdanm/QT-OOP)**.
@@ -9,16 +9,16 @@ A C++ application for fleet management, designed for tracking and managing drive
 - [ ] FleetManagement
 - [ ] **`FleetEase`** is a fleet management app developed entirely in C++ using the QT framework (check my [other](https://github.com/dbogdanm/QT-OOP) repo ). It provides functionalities like managing vehicles, routes and permissions, making it a comprehensive tool for fleet administration.
 
- 
-## **How can I use it?**
 
-   ## ***METHOD 1***
+## ❔**How can I use it❔**
+
+   ## 🟢***METHOD 1***
 
    **1. Download QT Framework (preferably version 14.0.2)**
 
    **2. Download my [other](https://github.com/dbogdanm/QT-OOP) repo and build it inside QT.**
 
-   ## ***METHOD 2***
+   ## 🔵***METHOD 2***
           
    **Just simply `git clone https://github.com/dbogdanm/QT-OOP` inside QT dev environment's terminal and build the project.**
       Now you should see something like [this](https://media.discordapp.net/attachments/757656608137412719/1305835843013054524/image.png?ex=6746eee6&is=67459d66&hm=f7323c0e399c838e2ea1bf9a2402d8502f7b7d0ec8bbdc13a41cb5aa492081b8&=&format=webp&quality=lossless&width=760&height=488) and like [this](https://media.discordapp.net/attachments/757656608137412719/1305654537327218698/image.png?ex=6746eecb&is=67459d4b&hm=e83afe023d413a8d10301521d2e14d6a94e48c3fd4ae4ae95b5d54e5f1e484cc&=&format=webp&quality=lossless&width=868&height=469). 
