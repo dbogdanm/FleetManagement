@@ -1,44 +1,41 @@
-name: 'Run cppcheck'
-description: 'Install and run cppcheck'
+name: 'Cppcheck Analysis'
+description: 'Run Cppcheck for static code analysis'
+
+inputs:
+  include-paths:
+    description: 'Paths to include for analysis'
+    required: true
+    default: './Models ./Exceptions ./generated/include'
+  std:
+    description: 'C++ standard'
+    required: false
+    default: 'c++20'
+  check-level:
+    description: 'Check level'
+    required: false
+    default: 'exhaustive'
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - name: Cache cppcheck
-      uses: actions/cache/restore@v4
-      id: cache-cppcheck
-      with:
-        path: cppcheck
-        key: cppcheck-${{ env.CPPCHECK_VER }}
-
-    - name: Build cppcheck
-      shell: bash
-      if: steps.cache-cppcheck.outputs.cache-hit != 'true'
-      run: |
-        bash ./scripts/build_cppcheck.sh -v ${CPPCHECK_VER}
-
-    - name: Save cppcheck cache
-      uses: actions/cache/save@v4
-      if: steps.cache-cppcheck.outputs.cache-hit != 'true'
-      with:
-        path: cppcheck
-        key: cppcheck-${{ env.CPPCHECK_VER }}
-
-    - name: Install cppcheck
-      shell: bash
-      # this step is fast, no need for caching
-      run: |
-        cd cppcheck
-        sudo cmake --install build
-
-    # The flag CMAKE_EXPORT_COMPILE_COMMANDS generates compile_commands.json
-    # which is used by cppcheck and clang-tidy
-    - name: Configure CMake
-      uses: ./.github/actions/configure-cmake
-      with:
-        custom_flags: '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
-
-    - name: Cppcheck
+    - name: Install Cppcheck
       shell: bash
       run: |
-        bash ./scripts/run_cppcheck.sh
+        sudo apt-get update
+        sudo apt-get install -y cppcheck
+
+    - name: Run Cppcheck
+      shell: bash
+      run: |
+        cppcheck --include-path=${{ inputs.include-paths }} \
+                 --enable=all \
+                 --inconclusive \
+                 --std=${{ inputs.std }} \
+                 --check-level=${{ inputs.check-level }} \
+                 --output-file=cppcheck_report.txt .
+
+    - name: Upload Cppcheck Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: cppcheck-report
+        path: cppcheck_report.txt
