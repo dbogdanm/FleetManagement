@@ -27,7 +27,7 @@ runs:
     - name: Run Cppcheck
       shell: bash
       run: |
-        cppcheck --include-path=${{ inputs.include-paths }} \
+        cppcheck $(echo "${{ inputs.include-paths }}" | sed 's/ / -I /g' | sed 's/^/-I /') \
                  --enable=all \
                  --inconclusive \
                  --std=${{ inputs.std }} \
