@@ -80,6 +80,10 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE Exceptions)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
 # target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
 # target_link_libraries(${PROJECT_NAME} <SomeLib>)
+include_directories(
+        ${CMAKE_SOURCE_DIR}/Models
+        ${CMAKE_SOURCE_DIR}/Exceptions
+)
 
 ###############################################################################
 
