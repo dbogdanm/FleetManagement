@@ -10,10 +10,6 @@ inputs:
     description: 'C++ standard'
     required: false
     default: 'c++20'
-  check-level:
-    description: 'Check level'
-    required: false
-    default: 'exhaustive'
 
 runs:
   using: 'composite'
@@ -31,7 +27,6 @@ runs:
                  --enable=all \
                  --inconclusive \
                  --std=${{ inputs.std }} \
-                 --check-level=${{ inputs.check-level }} \
                  --output-file=cppcheck_report.txt .
 
     - name: Upload Cppcheck Report
