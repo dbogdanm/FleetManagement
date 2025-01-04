@@ -58,6 +58,14 @@ add_executable(${PROJECT_NAME}
         Exceptions/RouteNotFoundException.h
         Exceptions/VehicleNotFoundException.h
         generated/include/Helper.h
+        generated/src/Vehicle.cpp
+        generated/src/Bus.cpp
+        generated/src/Motorcycle.cpp
+        generated/src/Truck.cpp
+        generated/src/Driver.cpp
+        generated/src/Route.cpp
+        generated/src/FleetManager.cpp
+        generated/src/VehicleService.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

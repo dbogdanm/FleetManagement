@@ -11,7 +11,7 @@
  * @brief Abstract base class representing a generic vehicle.
  *
  * The Vehicle class serves as a base class for specific vehicle types such as
- * cars, buses, motorcycles, and trucks. It includes common attributes like VIN,
+ * buses, motorcycles, and trucks. It includes common attributes like VIN,
  * model, kilometers driven, and brand. The class enforces implementation of
  * specific methods in derived classes through pure virtual functions.
  */
@@ -41,103 +41,63 @@ protected:
 public:
     /**
      * @brief Constructs a Vehicle with the specified attributes.
-     *
-     * @param vin The Vehicle Identification Number (VIN).
-     * @param model The model name of the vehicle.
-     * @param kilometers The kilometers driven by the vehicle.
-     * @param brand The brand of the vehicle.
      */
-    Vehicle(int vin, std::string model, int kilometers, std::string brand)
-        : vin(vin), model(std::move(model)), kilometers(kilometers), brand(std::move(brand)) {}
+    Vehicle(int vin, std::string model, int kilometers, std::string brand);
 
     /**
      * @brief Copy constructor for Vehicle.
-     *
-     * Creates a copy of the given Vehicle object.
-     *
-     * @param other The Vehicle object to copy.
      */
-    Vehicle(const Vehicle& other)
-        : vin(other.vin), model(other.model),
-          kilometers(other.kilometers), brand(other.brand) {}
+    Vehicle(const Vehicle& other);
 
     /**
      * @brief Virtual destructor for Vehicle.
-     *
-     * Ensures proper cleanup of resources in derived classes.
      */
     virtual ~Vehicle() = default;
 
     /**
-     * @brief Displays detailed information about the vehicle.
-     *
-     * This is a pure virtual function that must be implemented in derived classes.
+     * @brief Displays detailed information about the vehicle (pure virtual).
      */
     virtual void display() const = 0;
 
     /**
-     * @brief Performs maintenance on the vehicle.
-     *
-     * This is a pure virtual function that must be implemented in derived classes.
+     * @brief Performs maintenance on the vehicle (pure virtual).
      */
     virtual void performMaintenance() = 0;
 
     /**
-     * @brief Creates a unique pointer to a cloned Vehicle object.
-     *
-     * This is a pure virtual function that must be implemented in derived classes
-     * to support cloning.
-     *
-     * @return A unique pointer to a copy of the Vehicle.
+     * @brief Creează un obiect clonat al vehiculului curent (pure virtual).
      */
     [[nodiscard]] virtual std::unique_ptr<Vehicle> clone() const = 0;
 
     /**
-     * @brief Displays basic information about the vehicle.
+     * @brief Returnează costul de mentenanță al vehiculului (pure virtual).
      *
-     * Outputs the VIN, model, kilometers driven, and brand to the console.
+     * Am adăugat această funcție deoarece în VehicleService apare
+     * `vehicle->calculateMaintenanceCost()`.
      */
-    void showInfo() const
-    {
-        std::cout << "VIN: " << vin << ", Model: " << model
-                  << ", Kilometers: " << kilometers << ", Brand: " << brand << std::endl;
-    }
+    [[nodiscard]] virtual double calculateMaintenanceCost() const = 0;
+
+    /**
+     * @brief Displays basic information about the vehicle.
+     */
+    void showInfo() const;
 
     /**
      * @brief Gets the VIN of the vehicle.
-     *
-     * @return The Vehicle Identification Number (VIN).
      */
-    [[nodiscard]] int getVin() const
-    {
-        return vin;
-    }
+    [[nodiscard]] int getVin() const;
 
 protected:
     /**
-     * @brief Swaps the base attributes of two Vehicle objects.
-     *
-     * This method is intended for use in derived class implementations of the
-     * copy-and-swap idiom.
-     *
-     * @param other The Vehicle object to swap with.
+     * @brief Swaps the base attributes of two Vehicle objects (folosit în copy-and-swap).
      */
-    void swapBase(Vehicle& other) noexcept
-    {
-        using std::swap;
-        swap(vin, other.vin);
-        swap(model, other.model);
-        swap(kilometers, other.kilometers);
-        swap(brand, other.brand);
-    }
+    void swapBase(Vehicle& other) noexcept;
 
 public:
     /**
      * @brief Deleted assignment operator for Vehicle.
-     *
-     * Copy assignment is prohibited for Vehicle objects to prevent shallow copies.
      */
     Vehicle& operator=(const Vehicle& other) = delete;
 };
 
-#endif
+#endif // VEHICLE_H
