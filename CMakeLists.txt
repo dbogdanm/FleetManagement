@@ -83,6 +83,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE Exceptions)
 include_directories(
         ${CMAKE_SOURCE_DIR}/Models
         ${CMAKE_SOURCE_DIR}/Exceptions
+        ${CMAKE_SOURCE_DIR}/generated/include
 )
 
 ###############################################################################
