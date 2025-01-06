@@ -55,10 +55,10 @@ std::unique_ptr<Vehicle> Bus::clone() const
 
 double Bus::calculateMaintenanceCost() const
 {
-    // Exemplu de calcul ipotetic al costului de mentenanță
-    double baseCost = 300.0;        // cost de bază
-    double costPerKm = 0.05;        // cost per kilometru
-    double wifiExtra = hasWiFi ? 50.0 : 0.0; // cost suplimentar pentru WiFi
+
+    double baseCost = 300.0;
+    double costPerKm = 0.05;
+    double wifiExtra = hasWiFi ? 50.0 : 0.0;
     return baseCost + (kilometers * costPerKm) + wifiExtra;
 }
 

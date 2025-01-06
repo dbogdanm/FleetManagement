@@ -22,6 +22,7 @@
  */
 class FleetManager
 {
+
 private:
     std::vector<Driver> drivers;
     std::vector<std::unique_ptr<Vehicle>> vehicles;

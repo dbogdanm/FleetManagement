@@ -43,7 +43,7 @@ void Motorcycle::display() const
 void Motorcycle::performMaintenance()
 {
     std::cout << "[Motorcycle] Performing advanced maintenance for VIN " << vin << "...\n";
-    // Exemplu de logică
+
     double cost = calculateMaintenanceCost();
     std::cout << "Maintenance cost for this Motorcycle is about: " << cost << " RON\n";
 }
@@ -55,7 +55,7 @@ std::unique_ptr<Vehicle> Motorcycle::clone() const
 
 double Motorcycle::calculateMaintenanceCost() const
 {
-    // Simplu exemplu
+
     double baseCost = 150.0;
     double costPerKm = 0.03;
     double sidecarExtra = hasSidecar ? 20.0 : 0.0;

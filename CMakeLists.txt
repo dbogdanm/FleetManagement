@@ -57,7 +57,6 @@ add_executable(${PROJECT_NAME}
         Exceptions/DriverNotFoundException.h
         Exceptions/RouteNotFoundException.h
         Exceptions/VehicleNotFoundException.h
-        generated/include/Helper.h
         generated/src/Vehicle.cpp
         generated/src/Bus.cpp
         generated/src/Motorcycle.cpp
@@ -66,6 +65,14 @@ add_executable(${PROJECT_NAME}
         generated/src/Route.cpp
         generated/src/FleetManager.cpp
         generated/src/VehicleService.cpp
+        generated/include/FleetContainer.cpp
+        generated/headers/FleetContainer.h
+        generated/headers/MaintenanceCalculator.h
+        generated/include/MaintenanceCalculator.cpp
+        generated/headers/ServiceObserver.h
+        generated/include/ServiceObserver.cpp
+        generated/headers/VehicleFactory.h
+        generated/include/VehicleFactory.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

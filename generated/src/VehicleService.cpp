@@ -50,12 +50,11 @@ std::ostream& operator<<(std::ostream& os, const VehicleService& service)
 
 void VehicleService::GetTrailerCapacity()
 {
-    // În codul original se vedea un dynamic_cast<Truck> pe pointerul vehicle, dar era un shared_ptr.
-    // Aici, avem doar un pointer clasic, așa că facem:
+
     auto* truck = dynamic_cast<Truck*>(vehicle);
     if (truck)
     {
-        // Metodă fictivă, se poate folosi getLoadCapacity() daca vrei să vezi ceva concret.
+
         std::cout << "Truck load capacity is: " << truck->getLoadCapacity() << " tons\n";
     }
     else

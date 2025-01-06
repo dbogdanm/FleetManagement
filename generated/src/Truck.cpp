@@ -44,7 +44,7 @@ void Truck::display() const
 void Truck::performMaintenance()
 {
     std::cout << "[Truck] Performing advanced maintenance for VIN " << vin << "...\n";
-    // Exemplu de logică
+
     double cost = calculateMaintenanceCost();
     std::cout << "Maintenance cost for this Truck is about: " << cost << " RON\n";
 }
@@ -56,7 +56,7 @@ std::unique_ptr<Vehicle> Truck::clone() const
 
 double Truck::calculateMaintenanceCost() const
 {
-    // Exemplu de calcul
+
     double baseCost = 400.0;
     double costPerKm = 0.07;
     double loadFactor = loadCapacity * 10.0;

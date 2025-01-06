@@ -24,7 +24,7 @@ public:
 
     /**
      * @brief Metodă care ar trebui să fie specifică pentru Truck.
-     *        Folosim dynamic_cast pentru a vedea dacă e truck.
+     *        Using dynamic_cast.
      */
     void GetTrailerCapacity();
 };

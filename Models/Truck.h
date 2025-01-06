@@ -10,8 +10,8 @@
 class Truck : public Vehicle
 {
 private:
-    double loadCapacity;    // in tons
-    double fuelEfficiency;  // in L/100km
+    double loadCapacity;
+    double fuelEfficiency;
 
 public:
     Truck(int vin, const std::string& model, int kilometers,
