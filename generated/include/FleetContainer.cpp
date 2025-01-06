@@ -17,11 +17,12 @@ void FleetContainer<T>::displayItems() const {
 
 template<typename T>
 T FleetContainer<T>::getItem(int index) const {
-    if (index >= 0 && index < items.size()) {
+    if (index >= 0 && static_cast<std::size_t>(index) < items.size()) {
         return items[index];
     }
     throw std::out_of_range("Index out of range");
 }
+
 
 
 template class FleetContainer<Driver>;
