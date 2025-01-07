@@ -1,5 +1,15 @@
 #include "FleetManager.h"
+#include <iostream>
+#include <iomanip>
 
+/**
+ * @brief Constructor for FleetManager.
+ * @param drivers Vector of drivers.
+ * @param vehicles Vector of unique pointers to vehicles.
+ * @param routes Vector of routes.
+ *
+ * Initializes the fleet manager with drivers, vehicles, and routes.
+ */
 FleetManager::FleetManager(std::vector<Driver> drivers,
                            std::vector<std::unique_ptr<Vehicle>> vehicles,
                            std::vector<Route> routes)
@@ -9,6 +19,12 @@ FleetManager::FleetManager(std::vector<Driver> drivers,
 {
 }
 
+/**
+ * @brief Copy constructor for FleetManager.
+ * @param other Another FleetManager object to copy from.
+ *
+ * Creates a deep copy of vehicles and shallow copies of drivers and routes.
+ */
 FleetManager::FleetManager(const FleetManager& other)
 {
     drivers = other.drivers;
@@ -20,12 +36,22 @@ FleetManager::FleetManager(const FleetManager& other)
     routes = other.routes;
 }
 
+/**
+ * @brief Copy assignment operator using copy-and-swap idiom.
+ * @param other Another FleetManager object to assign from.
+ * @return Reference to the current object.
+ */
 FleetManager& FleetManager::operator=(FleetManager other)
 {
     swap(*this, other);
     return *this;
 }
 
+/**
+ * @brief Swaps two FleetManager objects.
+ * @param first First FleetManager object.
+ * @param second Second FleetManager object.
+ */
 void swap(FleetManager& first, FleetManager& second) noexcept
 {
     using std::swap;
@@ -34,11 +60,20 @@ void swap(FleetManager& first, FleetManager& second) noexcept
     swap(first.routes, second.routes);
 }
 
+/**
+ * @brief Adds a driver to the fleet.
+ * @param driver The driver to add.
+ */
 void FleetManager::addDriver(const Driver& driver)
 {
     drivers.push_back(driver);
 }
 
+/**
+ * @brief Removes a driver by ID.
+ * @param id The ID of the driver to remove.
+ * @throws DriverNotFoundException if the driver ID is not found.
+ */
 void FleetManager::removeDriverById(int id)
 {
     auto it = std::remove_if(drivers.begin(), drivers.end(),
@@ -52,11 +87,20 @@ void FleetManager::removeDriverById(int id)
     drivers.erase(it, drivers.end());
 }
 
+/**
+ * @brief Adds a route to the fleet.
+ * @param route The route to add.
+ */
 void FleetManager::addRoute(const Route& route)
 {
     routes.push_back(route);
 }
 
+/**
+ * @brief Removes a route by ID.
+ * @param id The ID of the route to remove.
+ * @throws RouteNotFoundException if the route ID is not found.
+ */
 void FleetManager::removeRouteById(int id)
 {
     auto it = std::remove_if(routes.begin(), routes.end(),
@@ -70,11 +114,20 @@ void FleetManager::removeRouteById(int id)
     routes.erase(it, routes.end());
 }
 
+/**
+ * @brief Adds a vehicle to the fleet.
+ * @param vehicle Unique pointer to the vehicle to add.
+ */
 void FleetManager::addVehicle(std::unique_ptr<Vehicle> vehicle)
 {
     vehicles.emplace_back(std::move(vehicle));
 }
 
+/**
+ * @brief Removes a vehicle by VIN.
+ * @param vin The VIN of the vehicle to remove.
+ * @throws VehicleNotFoundException if the vehicle VIN is not found.
+ */
 void FleetManager::removeVehicleByVin(int vin)
 {
     auto it = std::remove_if(vehicles.begin(), vehicles.end(),
@@ -88,6 +141,12 @@ void FleetManager::removeVehicleByVin(int vin)
     vehicles.erase(it, vehicles.end());
 }
 
+/**
+ * @brief Displays information about all drivers, vehicles, and routes.
+ *
+ * Iterates through the fleet and displays details of drivers, vehicles,
+ * and routes, including specific details for different vehicle types.
+ */
 void FleetManager::displayFleet() const
 {
     std::cout << "=== Fleet Information ===" << std::endl;
@@ -129,4 +188,33 @@ void FleetManager::displayFleet() const
     }
 
     std::cout << "===============================" << std::endl;
+}
+
+/**
+ * @brief Optimizes resource allocation for all vehicles.
+ *
+ * Calls `optimizeResourceAllocation` on each vehicle and displays
+ * the optimization strategy and efficiency score.
+ */
+void FleetManager::optimizeAllVehicles()
+{
+    std::cout << "=== Vehicle Resource Optimization Report ===\n";
+
+    for (const std::unique_ptr<Vehicle>& vehicle : vehicles)
+    {
+        if (vehicle)
+        {
+            std::pair<std::string, double> optimizationResult = vehicle->optimizeResourceAllocation();
+            std::cout << "VIN: " << vehicle->getVin() << "\n"
+                      << "  Strategy: " << optimizationResult.first << "\n"
+                      << "  Efficiency Score: " << std::fixed << std::setprecision(2)
+                      << optimizationResult.second << "\n"
+                      << "------------------------------------------\n";
+        }
+        else
+        {
+            std::cout << "[Error] Null vehicle encountered in fleet!\n";
+        }
+    }
+    std::cout << "=================================\n";
 }

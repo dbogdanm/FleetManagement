@@ -6,38 +6,35 @@
 
 /**
  * @class Bus
- * @brief Represents a bus, derived from the Vehicle class.
+ * @brief Represents a bus vehicle.
  */
 class Bus : public Vehicle
 {
 private:
-    int seatingCapacity;
-    bool hasWiFi;
+    int seatingCapacity; ///< Number of seats.
+    bool hasWiFi; ///< WiFi availability.
 
 public:
     Bus(int vin, const std::string& model, int kilometers,
-        const std::string& brand, int seatingCapacity, bool hasWiFi);
+        const std::string& brand, int seatingCapacity, bool hasWiFi); ///< Constructor.
+    Bus(const Bus& other); ///< Copy constructor.
+    Bus& operator=(Bus other); ///< Copy assignment.
 
-    Bus(const Bus& other);
+    friend void swap(Bus& first, Bus& second) noexcept; ///< Swap two buses.
 
-    Bus& operator=(Bus other);
+    ~Bus() override = default; ///< Destructor.
 
-    friend void swap(Bus& first, Bus& second) noexcept;
+    void display() const override; ///< Show bus details.
+    void performMaintenance() override; ///< Perform maintenance.
+    std::unique_ptr<Vehicle> clone() const override; ///< Clone bus.
+    double calculateMaintenanceCost() const override; ///< Calculate maintenance cost.
+    std::pair<std::string, double> optimizeResourceAllocation() const override; ///< Optimize resources.
 
-    ~Bus() override = default;
+    int getSeatingCapacity() const; ///< Get seating capacity.
+    bool getHasWiFi() const; ///< Check WiFi availability.
 
-    void display() const override;
-    void performMaintenance() override;
-    [[nodiscard]] std::unique_ptr<Vehicle> clone() const override;
-    [[nodiscard]] double calculateMaintenanceCost() const override;
-
-    [[nodiscard]] int getSeatingCapacity() const;
-    [[nodiscard]] bool getHasWiFi() const;
-
-    void upgradeWiFi();
-
-    void increaseSeatingCapacity(int extraSeats);
-
+    void upgradeWiFi(); ///< Upgrade WiFi.
+    void increaseSeatingCapacity(int extraSeats); ///< Add seats.
 };
 
 #endif // BUS_H

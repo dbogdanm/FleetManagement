@@ -18,46 +18,44 @@
 
 /**
  * @class FleetManager
- * @brief Manages the fleet system including drivers, vehicles, and routes.
+ * @brief Manages drivers, vehicles, and routes in a fleet system.
  */
 class FleetManager
 {
-
 private:
-    std::vector<Driver> drivers;
-    std::vector<std::unique_ptr<Vehicle>> vehicles;
-    std::vector<Route> routes;
+    std::vector<Driver> drivers; ///< List of drivers.
+    std::vector<std::unique_ptr<Vehicle>> vehicles; ///< List of vehicles.
+    std::vector<Route> routes; ///< List of routes.
 
 public:
     FleetManager(std::vector<Driver> drivers,
                  std::vector<std::unique_ptr<Vehicle>> vehicles,
-                 std::vector<Route> routes);
+                 std::vector<Route> routes); ///< Constructor.
 
-    FleetManager(const FleetManager& other);
-    FleetManager& operator=(FleetManager other);
+    FleetManager(const FleetManager& other); ///< Copy constructor.
+    FleetManager& operator=(FleetManager other); ///< Copy assignment operator.
 
-    friend void swap(FleetManager& first, FleetManager& second) noexcept;
+    friend void swap(FleetManager& first, FleetManager& second) noexcept; ///< Swap two FleetManager objects.
 
-    ~FleetManager() = default;
+    ~FleetManager() = default; ///< Destructor.
 
-    void addDriver(const Driver& driver);
-    void removeDriverById(int id);
+    void addDriver(const Driver& driver); ///< Add a driver.
+    void removeDriverById(int id); ///< Remove a driver by ID.
 
-    void addRoute(const Route& route);
-    void removeRouteById(int id);
+    void addRoute(const Route& route); ///< Add a route.
+    void removeRouteById(int id); ///< Remove a route by ID.
 
-    void addVehicle(std::unique_ptr<Vehicle> vehicle);
-    void removeVehicleByVin(int vin);
+    void addVehicle(std::unique_ptr<Vehicle> vehicle); ///< Add a vehicle.
+    void removeVehicleByVin(int vin); ///< Remove a vehicle by VIN.
 
-    void displayFleet() const;
+    void displayFleet() const; ///< Display fleet details.
+    void optimizeAllVehicles(); ///< Optimize resources for all vehicles.
 
+    std::vector<Driver>& getDrivers(); ///< Get drivers (modifiable).
+    const std::vector<Driver>& getDrivers() const; ///< Get drivers (read-only).
 
-    std::vector<Driver>& getDrivers();
-    const std::vector<Driver>& getDrivers() const;
-
-
-    std::vector<std::unique_ptr<Vehicle>>& getVehicles();
-    const std::vector<std::unique_ptr<Vehicle>>& getVehicles() const;
+    std::vector<std::unique_ptr<Vehicle>>& getVehicles(); ///< Get vehicles (modifiable).
+    const std::vector<std::unique_ptr<Vehicle>>& getVehicles() const; ///< Get vehicles (read-only).
 };
 
 #endif // FLEETMANAGER_H

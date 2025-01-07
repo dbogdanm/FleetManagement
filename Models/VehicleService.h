@@ -5,28 +5,28 @@
 #include <iostream>
 #include <memory>
 
+/**
+ * @class VehicleService
+ * @brief Manages vehicle maintenance and related operations.
+ */
 class VehicleService
 {
 private:
-    Vehicle* vehicle;
+    Vehicle* vehicle; ///< Pointer to the associated vehicle.
 
 public:
-    VehicleService(Vehicle* vehicle);
-    VehicleService(const VehicleService& other);
-    VehicleService& operator=(VehicleService other);
-    ~VehicleService();
+    VehicleService(Vehicle* vehicle); ///< Constructor.
+    VehicleService(const VehicleService& other); ///< Copy constructor.
+    VehicleService& operator=(VehicleService other); ///< Copy assignment operator.
+    ~VehicleService(); ///< Destructor.
 
-    friend void swap(VehicleService& first, VehicleService& second) noexcept;
+    friend void swap(VehicleService& first, VehicleService& second) noexcept; ///< Swap two services.
 
-    double GetCost() const;
+    double GetCost() const; ///< Get maintenance cost.
 
-    friend std::ostream& operator<<(std::ostream& os, const VehicleService& service);
+    friend std::ostream& operator<<(std::ostream& os, const VehicleService& service); ///< Output service details.
 
-    /**
-     * @brief Metodă care ar trebui să fie specifică pentru Truck.
-     *        Using dynamic_cast.
-     */
-    void GetTrailerCapacity();
+    void GetTrailerCapacity(); ///< Get trailer capacity if the vehicle is a truck.
 };
 
 #endif // VEHICLESERVICE_H

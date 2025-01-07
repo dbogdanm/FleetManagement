@@ -120,5 +120,21 @@ int main()
         std::cerr << "Unknown exception caught." << std::endl;
     }
 
+    std::unique_ptr<Vehicle> bus = std::make_unique<Bus>(201, "CityBus", 10000, "Mercedes", 50, true);
+    std::unique_ptr<Vehicle> motorcycle = std::make_unique<Motorcycle>(203, "Speedster", 2000, "Yamaha", 600.0, false);
+    std::unique_ptr<Vehicle> truck = std::make_unique<Truck>(202, "FreightTruck", 5000, "Volvo", 15.0, 8.5);
+
+    auto busOptimization = bus->optimizeResourceAllocation();
+    std::cout << "[Bus Optimization] Strategy: " << busOptimization.first
+              << ", Efficiency Score: " << busOptimization.second << "\n";
+
+    auto motoOptimization = motorcycle->optimizeResourceAllocation();
+    std::cout << "[Motorcycle Optimization] Strategy: " << motoOptimization.first
+              << ", Efficiency Score: " << motoOptimization.second << "\n";
+
+    auto truckOptimization = truck->optimizeResourceAllocation();
+    std::cout << "[Truck Optimization] Strategy: " << truckOptimization.first
+              << ", Efficiency Score: " << truckOptimization.second << "\n";
+
     return 0;
 }

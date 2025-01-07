@@ -1,13 +1,20 @@
 #include "Vehicle.h"
+#include <iostream>
+#include <utility>
 
 /**
- * @brief Vehicle constructor
+ * @brief Constructor for Vehicle.
+ * @param vin Vehicle Identification Number.
+ * @param model Model of the vehicle.
+ * @param kilometers Kilometers driven by the vehicle.
+ * @param brand Brand of the vehicle.
  */
 Vehicle::Vehicle(int vin, std::string model, int kilometers, std::string brand)
     : vin(vin), model(std::move(model)), kilometers(kilometers), brand(std::move(brand)) {}
 
 /**
- * @brief Vehicle copy constructor
+ * @brief Copy constructor for Vehicle.
+ * @param other Another Vehicle object to copy from.
  */
 Vehicle::Vehicle(const Vehicle& other)
     : vin(other.vin),
@@ -18,7 +25,9 @@ Vehicle::Vehicle(const Vehicle& other)
 }
 
 /**
- * @brief Afișează informații de bază (non-virtual).
+ * @brief Displays basic vehicle information.
+ *
+ * Prints the vehicle's VIN, model, kilometers driven, and brand.
  */
 void Vehicle::showInfo() const
 {
@@ -30,7 +39,8 @@ void Vehicle::showInfo() const
 }
 
 /**
- * @brief Returnează VIN.
+ * @brief Retrieves the vehicle's VIN.
+ * @return Vehicle Identification Number (VIN).
  */
 int Vehicle::getVin() const
 {
@@ -38,7 +48,10 @@ int Vehicle::getVin() const
 }
 
 /**
- * @brief Swap pentru atributele de bază ale clasei Vehicle.
+ * @brief Swaps base attributes between two Vehicle objects.
+ * @param other Another Vehicle object to swap attributes with.
+ *
+ * Exchanges the VIN, model, kilometers, and brand between two Vehicle objects.
  */
 void Vehicle::swapBase(Vehicle& other) noexcept
 {
