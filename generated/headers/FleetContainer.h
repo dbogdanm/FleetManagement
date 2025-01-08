@@ -2,7 +2,6 @@
 #define FLEET_CONTAINER_H
 
 #include <vector>
-#include <iostream>
 
 /**
  * @class FleetContainer

@@ -153,9 +153,9 @@ std::pair<std::string, double> Truck::optimizeResourceAllocation() const
     return {strategy, efficiencyScore};
 }
 
-#include <sstream>
 
-std::string Truck::performSafetyInspection() const {
+std::string Truck::performSafetyInspection() const
+{
     std::ostringstream report;
     report << "[Truck Safety Inspection Report]\n";
     report << "VIN: " << vin << "\n";

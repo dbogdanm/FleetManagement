@@ -17,7 +17,8 @@
  * of drivers, routes, and vehicles. These methods simulate reading data from files
  * and provide sample data for testing or initialization purposes.
  */
-class Helper {
+class Helper
+{
 public:
     /**
      * @brief Reads a predefined list of drivers.
@@ -67,7 +68,8 @@ public:
         std::vector<std::unique_ptr<Vehicle>> vehicles;
 
         // Bus
-        vehicles.emplace_back(std::make_unique<Bus>(
+        vehicles.emplace_back(std::make_unique<Bus>
+        (
             101, "Citaro", 345000, "Mercedes-Benz",
             73, false,       // seatingCapacity, hasWiFi
             80, 34, 88,      // brakeHealth, tirePressure, engineHealth
@@ -75,7 +77,8 @@ public:
         ));
 
         // Truck
-        vehicles.emplace_back(std::make_unique<Truck>(
+        vehicles.emplace_back(std::make_unique<Truck>
+        (
             102, "S-Series", 320000, "Scania",
             21.0, 38.0,      // loadCapacity, fuelEfficiency
             75, 36, 85,      // brakeHealth, tirePressure, engineHealth
@@ -83,7 +86,8 @@ public:
         ));
 
         // Motorcycle
-        vehicles.emplace_back(std::make_unique<Motorcycle>(
+        vehicles.emplace_back(std::make_unique<Motorcycle>
+        (
             103, "Primavera", 1000, "Vespa",
             125.0, false,    // engineDisplacement, hasSidecar
             78, 32, 83,      // brakeHealth, tirePressure, engineHealth

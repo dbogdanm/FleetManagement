@@ -153,9 +153,9 @@ std::pair<std::string, double> Motorcycle::optimizeResourceAllocation() const
                            "Assign to express delivery tasks.";
     return {strategy, efficiencyScore};
 }
-#include <sstream>
 
-std::string Motorcycle::performSafetyInspection() const {
+std::string Motorcycle::performSafetyInspection() const
+{
     std::ostringstream report;
     report << "[Motorcycle Safety Inspection Report]\n";
     report << "VIN: " << vin << "\n";

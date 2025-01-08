@@ -68,7 +68,8 @@ void swap(VehicleService& first, VehicleService& second) noexcept
  */
 double VehicleService::GetCost() const
 {
-    if (!vehicle) {
+    if (!vehicle)
+    {
         return 0.0;
     }
     return vehicle->calculateMaintenanceCost();
