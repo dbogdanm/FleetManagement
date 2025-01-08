@@ -19,7 +19,7 @@ int main()
 {
     try
     {
-        // 🔹 1. Inițializare date din Helper
+
         std::vector<Driver> drivers = Helper::ReadDriverFromFile();
         std::vector<Route> routes = Helper::ReadRouteFromFile();
         std::vector<std::unique_ptr<Vehicle>> vehicles = Helper::ReadVehicleFromFile();
@@ -63,10 +63,14 @@ int main()
         fleetManager.addRoute(Route(104, 120, "Bucuresti", "Buzau"));
         fleetManager.removeRouteById(104);
 
-        fleetManager.addVehicle(std::make_unique<Bus>(105, "Urbino", 8000, "Solaris", 45, true));
-        fleetManager.removeVehicleByVin(105);
+        fleetManager.addVehicle(std::make_unique<Bus>(
+            105, "Urbino", 8000, "Solaris",
+            45, true,            // seatingCapacity, hasWiFi
+            80, 33, 87,          // brakeHealth, tirePressure, engineHealth
+            true, 85            // safetySystemsFunctional, electronicSystemsHealth
+        ));
 
-        // 🆕 2. Factory Method Pattern (VehicleFactory)
+
         std::cout << "\n🔹 Factory Method Pattern Tests:\n";
         std::unique_ptr<Vehicle> factoryBus = VehicleFactory::createVehicle("Bus");
         std::unique_ptr<Vehicle> factoryTruck = VehicleFactory::createVehicle("Truck");
@@ -76,7 +80,7 @@ int main()
         factoryTruck->display();
         factoryMotorcycle->display();
 
-        // 🆕 3. Observer Pattern (ServiceObserver)
+
         std::cout << "\n🔹 Observer Pattern Tests:\n";
         VehicleServiceNotifier notifier;
         ServiceObserver observer1, observer2;
@@ -87,7 +91,7 @@ int main()
         notifier.notifyObservers("Service started for a vehicle!");
         notifier.notifyObservers("Service completed for a vehicle!");
 
-        // 🆕 4. FleetContainer Template Class Tests
+
         std::cout << "\n🔹 FleetContainer Template Tests:\n";
         FleetContainer<Driver> driverContainer;
         driverContainer.addItem(Driver(30, "Elena Ionescu", "0734567890", 60));
@@ -99,11 +103,23 @@ int main()
         routeContainer.addItem(Route(302, 250, "Iasi", "Bacau"));
         routeContainer.displayItems();
 
-        // 🆕 5. Template Function for Maintenance Cost
+
         std::cout << "\n🔹 Template Function Tests:\n";
-        Truck testTruck(501, "HeavyTruck", 15000, "MAN", 20.5, 10.5);
-        Bus testBus(502, "CityBus", 5000, "Mercedes", 60, true);
-        Motorcycle testMotorcycle(503, "SpeedMoto", 2000, "Yamaha", 750.0, false);
+        Truck testTruck(501, "HeavyTruck", 15000, "MAN",
+                20.5, 10.5,       // loadCapacity, fuelEfficiency
+                80, 36, 92,       // brakeHealth, tirePressure, engineHealth
+                true, 90);        // safetySystemsFunctional, electronicSystemsHealth
+
+        Bus testBus(502, "CityBus", 5000, "Mercedes",
+                    60, true,            // seatingCapacity, hasWiFi
+                    85, 32, 88,          // brakeHealth, tirePressure, engineHealth
+                    true, 87);           // safetySystemsFunctional, electronicSystemsHealth
+
+        Motorcycle testMotorcycle(503, "SpeedMoto", 2000, "Yamaha",
+                                  750.0, false,     // engineDisplacement, hasSidecar
+                                  75, 30, 85,       // brakeHealth, tirePressure, engineHealth
+                                  true, 83);        // safetySystemsFunctional, electronicSystemsHealth
+
 
         calculateAndDisplayCost(testTruck);
         calculateAndDisplayCost(testBus);
@@ -120,9 +136,27 @@ int main()
         std::cerr << "Unknown exception caught." << std::endl;
     }
 
-    std::unique_ptr<Vehicle> bus = std::make_unique<Bus>(201, "CityBus", 10000, "Mercedes", 50, true);
-    std::unique_ptr<Vehicle> motorcycle = std::make_unique<Motorcycle>(203, "Speedster", 2000, "Yamaha", 600.0, false);
-    std::unique_ptr<Vehicle> truck = std::make_unique<Truck>(202, "FreightTruck", 5000, "Volvo", 15.0, 8.5);
+    std::unique_ptr<Vehicle> bus = std::make_unique<Bus>(
+        201, "CityBus", 10000, "Mercedes",
+        50, true,          // seatingCapacity, hasWiFi
+        85, 32, 90,        // brakeHealth, tirePressure, engineHealth
+        true, 88          // safetySystemsFunctional, electronicSystemsHealth
+    );
+
+    std::unique_ptr<Vehicle> motorcycle = std::make_unique<Motorcycle>(
+        203, "Speedster", 2000, "Yamaha",
+        600.0, false,     // engineDisplacement, hasSidecar
+        75, 30, 85,       // brakeHealth, tirePressure, engineHealth
+        true, 83         // safetySystemsFunctional, electronicSystemsHealth
+    );
+
+    std::unique_ptr<Vehicle> truck = std::make_unique<Truck>(
+        202, "FreightTruck", 5000, "Volvo",
+        15.0, 8.5,        // loadCapacity, fuelEfficiency
+        80, 35, 92,       // brakeHealth, tirePressure, engineHealth
+        true, 90         // safetySystemsFunctional, electronicSystemsHealth
+    );
+
 
     auto busOptimization = bus->optimizeResourceAllocation();
     std::cout << "[Bus Optimization] Strategy: " << busOptimization.first
@@ -135,6 +169,35 @@ int main()
     auto truckOptimization = truck->optimizeResourceAllocation();
     std::cout << "[Truck Optimization] Strategy: " << truckOptimization.first
               << ", Efficiency Score: " << truckOptimization.second << "\n";
+
+    std::unique_ptr<Vehicle> busA = std::make_unique<Bus>(
+        201, "CityBus", 10000, "Mercedes",
+        50, true,       // seatingCapacity, hasWiFi
+        85, 32, 90,     // brakeHealth, tirePressure, engineHealth
+        true, 88        // safetySystemsFunctional, electronicSystemsHealth
+    );
+
+    std::unique_ptr<Vehicle> motorcycleA = std::make_unique<Motorcycle>(
+        203, "Speedster", 2000, "Yamaha",
+        600.0, false,   // engineDisplacement, hasSidecar
+        75, 30, 85,     // brakeHealth, tirePressure, engineHealth
+        true, 83        // safetySystemsFunctional, electronicSystemsHealth
+    );
+
+    std::unique_ptr<Vehicle> truckA = std::make_unique<Truck>(
+        202, "FreightTruck", 5000, "Volvo",
+        15.0, 8.5,      // loadCapacity, fuelEfficiency
+        80, 35, 92,     // brakeHealth, tirePressure, engineHealth
+        true, 90        // safetySystemsFunctional, electronicSystemsHealth
+    );
+
+
+    std::cout << "=== Safety Inspection Reports ===\n";
+
+    std::cout << bus->performSafetyInspection() << "\n";
+    std::cout << motorcycle->performSafetyInspection() << "\n";
+    std::cout << truck->performSafetyInspection() << "\n";
+
 
     return 0;
 }

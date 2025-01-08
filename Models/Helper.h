@@ -61,14 +61,38 @@ public:
      *
      * @return A vector of unique pointers to Vehicle objects.
      */
+
     static std::vector<std::unique_ptr<Vehicle>> ReadVehicleFromFile()
     {
         std::vector<std::unique_ptr<Vehicle>> vehicles;
-        vehicles.emplace_back(std::make_unique<Bus>(101, "Citaro", 345000, "Mercedes-Benz", 73, false));
-        vehicles.emplace_back(std::make_unique<Truck>(102, "S-Series", 320000, "Scania", 21, 38));
-        vehicles.emplace_back(std::make_unique<Motorcycle>(103, "Primavera", 1000, "Vespa", 125.0, false));
+
+        // Bus
+        vehicles.emplace_back(std::make_unique<Bus>(
+            101, "Citaro", 345000, "Mercedes-Benz",
+            73, false,       // seatingCapacity, hasWiFi
+            80, 34, 88,      // brakeHealth, tirePressure, engineHealth
+            true, 86         // safetySystemsFunctional, electronicSystemsHealth
+        ));
+
+        // Truck
+        vehicles.emplace_back(std::make_unique<Truck>(
+            102, "S-Series", 320000, "Scania",
+            21.0, 38.0,      // loadCapacity, fuelEfficiency
+            75, 36, 85,      // brakeHealth, tirePressure, engineHealth
+            true, 82         // safetySystemsFunctional, electronicSystemsHealth
+        ));
+
+        // Motorcycle
+        vehicles.emplace_back(std::make_unique<Motorcycle>(
+            103, "Primavera", 1000, "Vespa",
+            125.0, false,    // engineDisplacement, hasSidecar
+            78, 32, 83,      // brakeHealth, tirePressure, engineHealth
+            true, 80         // safetySystemsFunctional, electronicSystemsHealth
+        ));
+
         return vehicles;
     }
+
 };
 
 #endif

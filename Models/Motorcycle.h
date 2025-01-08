@@ -15,9 +15,9 @@ private:
 
 public:
     Motorcycle(int vin, const std::string& model, int kilometers,
-               const std::string& brand, double engineDisplacement, bool hasSidecar); ///< Constructor.
+               const std::string& brand, double engineDisplacement, bool hasSidecar, int brakeHealth, int tirePressure, int engineHealth, bool safetySystemsFunctional, int electronicSystemsHealth); ///< Constructor.
     Motorcycle(const Motorcycle& other); ///< Copy constructor.
-    Motorcycle& operator=(Motorcycle other); ///< Copy assignment operator.
+    //Motorcycle& operator=(Motorcycle other); ///< Copy assignment operator.
 
     friend void swap(Motorcycle& first, Motorcycle& second) noexcept; ///< Swap two motorcycles.
 
@@ -28,6 +28,7 @@ public:
     std::unique_ptr<Vehicle> clone() const override; ///< Clone motorcycle.
     double calculateMaintenanceCost() const override; ///< Calculate maintenance cost.
     std::pair<std::string, double> optimizeResourceAllocation() const override; ///< Optimize resources.
+    std::string performSafetyInspection() const override;
 
     double getEngineDisplacement() const; ///< Get engine displacement.
     bool getHasSidecar() const; ///< Check if it has a sidecar.

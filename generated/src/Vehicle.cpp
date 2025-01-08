@@ -9,8 +9,15 @@
  * @param kilometers Kilometers driven by the vehicle.
  * @param brand Brand of the vehicle.
  */
-Vehicle::Vehicle(int vin, std::string model, int kilometers, std::string brand)
-    : vin(vin), model(std::move(model)), kilometers(kilometers), brand(std::move(brand)) {}
+Vehicle::Vehicle(int vin, std::string model, int kilometers, std::string brand,
+                 int brakeHealth, int tirePressure, int engineHealth,
+                 bool safetySystemsFunctional, int electronicSystemsHealth)
+    : vin(vin), model(std::move(model)), kilometers(kilometers), brand(std::move(brand)),
+      brakeHealth(brakeHealth), tirePressure(tirePressure), engineHealth(engineHealth),
+      safetySystemsFunctional(safetySystemsFunctional), electronicSystemsHealth(electronicSystemsHealth)
+{
+}
+
 
 /**
  * @brief Copy constructor for Vehicle.

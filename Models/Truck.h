@@ -15,9 +15,9 @@ private:
 
 public:
     Truck(int vin, const std::string& model, int kilometers,
-          const std::string& brand, double loadCapacity, double fuelEfficiency); ///< Constructor.
+          const std::string& brand, double loadCapacity, double fuelEfficiency, int brakeHealth, int tirePressure, int engineHealth, bool safetySystemsFunctional, int electronicSystemsHealth); ///< Constructor.
     Truck(const Truck& other); ///< Copy constructor.
-    Truck& operator=(Truck other); ///< Copy assignment operator.
+    //Truck& operator=(Truck other); ///< Copy assignment operator.
 
     friend void swap(Truck& first, Truck& second) noexcept; ///< Swap two trucks.
 
@@ -28,6 +28,7 @@ public:
     std::unique_ptr<Vehicle> clone() const override; ///< Clone truck.
     double calculateMaintenanceCost() const override; ///< Calculate maintenance cost.
     std::pair<std::string, double> optimizeResourceAllocation() const override; ///< Optimize resources.
+    std::string performSafetyInspection() const override; ///< Perform maintenance>
 
     double getLoadCapacity() const; ///< Get load capacity.
     double getFuelEfficiency() const; ///< Get fuel efficiency.

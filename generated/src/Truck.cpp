@@ -1,6 +1,7 @@
 #include "Truck.h"
 #include <iostream>
 #include <utility>
+#include <sstream>
 
 /**
  * @brief Constructor for Truck.
@@ -12,12 +13,16 @@
  * @param fuelEfficiency Fuel efficiency in liters per 100 kilometers.
  */
 Truck::Truck(int vin, const std::string& model, int kilometers,
-             const std::string& brand, double loadCapacity, double fuelEfficiency)
-    : Vehicle(vin, model, kilometers, brand),
+             const std::string& brand, double loadCapacity, double fuelEfficiency,
+             int brakeHealth, int tirePressure, int engineHealth,
+             bool safetySystemsFunctional, int electronicSystemsHealth)
+    : Vehicle(vin, model, kilometers, brand, brakeHealth, tirePressure, engineHealth,
+              safetySystemsFunctional, electronicSystemsHealth),
       loadCapacity(loadCapacity),
       fuelEfficiency(fuelEfficiency)
 {
 }
+
 
 /**
  * @brief Copy constructor for Truck.
@@ -35,11 +40,11 @@ Truck::Truck(const Truck& other)
  * @param other Another Truck object to assign from.
  * @return Reference to the current object.
  */
-Truck& Truck::operator=(Truck other)
-{
-    swap(*this, other);
-    return *this;
-}
+// Truck& Truck::operator=(Truck other)
+// {
+//     swap(*this, other);
+//     return *this;
+// }
 
 /**
  * @brief Swaps two Truck objects.
@@ -146,4 +151,24 @@ std::pair<std::string, double> Truck::optimizeResourceAllocation() const
                            "Use for long-distance heavy cargo routes." :
                            "Assign to regional delivery tasks.";
     return {strategy, efficiencyScore};
+}
+
+#include <sstream>
+
+std::string Truck::performSafetyInspection() const {
+    std::ostringstream report;
+    report << "[Truck Safety Inspection Report]\n";
+    report << "VIN: " << vin << "\n";
+    report << "Model: " << model << "\n";
+    report << "Brand: " << brand << "\n";
+    report << "Brake Health: " << brakeHealth << "%\n";
+    report << "Tire Pressure: " << tirePressure << " psi\n";
+    report << "Engine Health: " << engineHealth << "%\n";
+    report << "Safety Systems: " << (safetySystemsFunctional ? "Functional" : "Non-functional") << "\n";
+    report << "Electronics Health: " << electronicSystemsHealth << "%\n";
+    report << "Load Capacity: " << loadCapacity << " tons\n";
+    report << "Fuel Efficiency: " << fuelEfficiency << " L/100km\n";
+    report << "Overall Status: " << (safetySystemsFunctional && brakeHealth > 70 && engineHealth > 70 ? "PASS" : "FAIL") << "\n";
+
+    return report.str();
 }

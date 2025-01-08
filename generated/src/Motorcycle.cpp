@@ -1,6 +1,7 @@
 #include "Motorcycle.h"
 #include <iostream>
 #include <utility>
+#include <sstream>
 
 /**
  * @brief Constructor for Motorcycle.
@@ -12,12 +13,16 @@
  * @param hasSidecar Indicates if the motorcycle has a sidecar.
  */
 Motorcycle::Motorcycle(int vin, const std::string& model, int kilometers,
-                       const std::string& brand, double engineDisplacement, bool hasSidecar)
-    : Vehicle(vin, model, kilometers, brand),
+                       const std::string& brand, double engineDisplacement, bool hasSidecar,
+                       int brakeHealth, int tirePressure, int engineHealth,
+                       bool safetySystemsFunctional, int electronicSystemsHealth)
+    : Vehicle(vin, model, kilometers, brand, brakeHealth, tirePressure, engineHealth,
+              safetySystemsFunctional, electronicSystemsHealth),
       engineDisplacement(engineDisplacement),
       hasSidecar(hasSidecar)
 {
 }
+
 
 /**
  * @brief Copy constructor for Motorcycle.
@@ -35,11 +40,11 @@ Motorcycle::Motorcycle(const Motorcycle& other)
  * @param other Another Motorcycle object to assign from.
  * @return Reference to the current object.
  */
-Motorcycle& Motorcycle::operator=(Motorcycle other)
-{
-    swap(*this, other);
-    return *this;
-}
+// Motorcycle& Motorcycle::operator=(Motorcycle other)
+// {
+//     swap(*this, other);
+//     return *this;
+// }
 
 /**
  * @brief Swaps two Motorcycle objects.
@@ -147,4 +152,23 @@ std::pair<std::string, double> Motorcycle::optimizeResourceAllocation() const
                            "Use for medium package delivery." :
                            "Assign to express delivery tasks.";
     return {strategy, efficiencyScore};
+}
+#include <sstream>
+
+std::string Motorcycle::performSafetyInspection() const {
+    std::ostringstream report;
+    report << "[Motorcycle Safety Inspection Report]\n";
+    report << "VIN: " << vin << "\n";
+    report << "Model: " << model << "\n";
+    report << "Brand: " << brand << "\n";
+    report << "Brake Health: " << brakeHealth << "%\n";
+    report << "Tire Pressure: " << tirePressure << " psi\n";
+    report << "Engine Health: " << engineHealth << "%\n";
+    report << "Safety Systems: " << (safetySystemsFunctional ? "Functional" : "Non-functional") << "\n";
+    report << "Electronics Health: " << electronicSystemsHealth << "%\n";
+    report << "Engine Displacement: " << engineDisplacement << " cc\n";
+    report << "Sidecar: " << (hasSidecar ? "Attached" : "Not Attached") << "\n";
+    report << "Overall Status: " << (safetySystemsFunctional && brakeHealth > 70 && engineHealth > 70 ? "PASS" : "FAIL") << "\n";
+
+    return report.str();
 }

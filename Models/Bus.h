@@ -16,7 +16,7 @@ private:
 
 public:
     Bus(int vin, const std::string& model, int kilometers,
-        const std::string& brand, int seatingCapacity, bool hasWiFi); ///< Constructor.
+        const std::string& brand, int seatingCapacity, bool hasWiFi, int brakeHealth, int tirePressure, int engineHealth, bool SystemsFunctional, int electronicSystemsHealth); ///< Constructor.
     Bus(const Bus& other); ///< Copy constructor.
     Bus& operator=(Bus other); ///< Copy assignment.
 
@@ -29,6 +29,7 @@ public:
     std::unique_ptr<Vehicle> clone() const override; ///< Clone bus.
     double calculateMaintenanceCost() const override; ///< Calculate maintenance cost.
     std::pair<std::string, double> optimizeResourceAllocation() const override; ///< Optimize resources.
+    std::string performSafetyInspection() const override; ///< Perform maintenance>
 
     int getSeatingCapacity() const; ///< Get seating capacity.
     bool getHasWiFi() const; ///< Check WiFi availability.

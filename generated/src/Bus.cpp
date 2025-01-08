@@ -1,6 +1,7 @@
 #include "Bus.h"
 #include <iostream>
 #include <utility>
+#include <sstream>
 
 /**
  * @brief Constructor for Bus.
@@ -11,13 +12,18 @@
  * @param seatingCapacity Number of passenger seats.
  * @param hasWiFi Availability of WiFi on the bus.
  */
+
 Bus::Bus(int vin, const std::string& model, int kilometers,
-         const std::string& brand, int seatingCapacity, bool hasWiFi)
-    : Vehicle(vin, model, kilometers, brand),
+         const std::string& brand, int seatingCapacity, bool hasWiFi,
+         int brakeHealth, int tirePressure, int engineHealth,
+         bool safetySystemsFunctional, int electronicSystemsHealth)
+    : Vehicle(vin, model, kilometers, brand, brakeHealth, tirePressure, engineHealth,
+              safetySystemsFunctional, electronicSystemsHealth),
       seatingCapacity(seatingCapacity),
       hasWiFi(hasWiFi)
 {
 }
+
 
 /**
  * @brief Copy constructor for Bus.
@@ -35,11 +41,11 @@ Bus::Bus(const Bus& other)
  * @param other Another Bus object to assign from.
  * @return Reference to the current object.
  */
-Bus& Bus::operator=(Bus other)
-{
-    swap(*this, other);
-    return *this;
-}
+// Bus& Bus::operator=(Bus other)
+// {
+//     swap(*this, other);
+//     return *this;
+// }
 
 /**
  * @brief Swaps two Bus objects.
@@ -158,4 +164,24 @@ std::pair<std::string, double> Bus::optimizeResourceAllocation() const
                            "Use on low-demand suburban routes.";
 
     return {strategy, efficiencyScore};
+}
+
+#include <sstream>
+
+std::string Bus::performSafetyInspection() const {
+    std::ostringstream report;
+    report << "[Bus Safety Inspection Report]\n";
+    report << "VIN: " << vin << "\n";
+    report << "Model: " << model << "\n";
+    report << "Brand: " << brand << "\n";
+    report << "Brake Health: " << brakeHealth << "%\n";
+    report << "Tire Pressure: " << tirePressure << " psi\n";
+    report << "Engine Health: " << engineHealth << "%\n";
+    report << "Safety Systems: " << (safetySystemsFunctional ? "Functional" : "Non-functional") << "\n";
+    report << "Electronics Health: " << electronicSystemsHealth << "%\n";
+    report << "Seating Capacity: " << seatingCapacity << "\n";
+    report << "WiFi: " << (hasWiFi ? "Available" : "Unavailable") << "\n";
+    report << "Overall Status: " << (safetySystemsFunctional && brakeHealth > 70 && engineHealth > 70 ? "PASS" : "FAIL") << "\n";
+
+    return report.str();
 }
