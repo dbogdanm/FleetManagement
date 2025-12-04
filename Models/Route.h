@@ -3,29 +3,27 @@
 
 #include <string>
 #include <iostream>
-#include <utility>
 
-/**
- * @class Route
- * @brief Represents a transportation route.
- */
-class Route
-{
+using namespace std;
+
+class Route {
 private:
-    int id; ///< Unique route identifier.
-    int distance; ///< Route distance in kilometers.
-    std::string startingPoint; ///< Starting point of the route.
-    std::string endingPoint; ///< Ending point of the route.
+    string startLocation;
+    string endLocation;
+    double distanceKm;
 
 public:
-    Route(int id, int distance, std::string startingPoint, std::string endingPoint); ///< Constructor.
-    Route(const Route& other); ///< Copy constructor.
-    Route& operator=(Route other); ///< Copy assignment operator.
+    Route(string start, string end, double dist)
+        : startLocation(start), endLocation(end), distanceKm(dist) {}
 
-    friend void swap(Route& first, Route& second) noexcept; ///< Swap two routes.
+    string getStartLocation() const { return startLocation; }
+    string getEndLocation() const { return endLocation; }
+    double getDistance() const { return distanceKm; }
 
-    [[nodiscard]] int getId() const; ///< Get route ID.
-    void display() const; ///< Display route details.
+    void displayInfo() const {
+        cout << "Route: " << startLocation << " to " << endLocation 
+             << " (" << distanceKm << " km)" << endl;
+    }
 };
 
-#endif // ROUTE_H
+#endif
