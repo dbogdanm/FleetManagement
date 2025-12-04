@@ -4,31 +4,26 @@
 #include <string>
 #include <iostream>
 
-/**
- * @class Driver
- * @brief Represents a driver in the fleet.
- */
-class Driver
-{
+using namespace std;
+
+class Driver {
 private:
-    int id; ///< Unique driver ID.
-    std::string name; ///< Driver's name.
-    std::string phone; ///< Driver's phone number.
-    int numberOfHours; ///< Hours worked by the driver.
-    static int totalDrivers; ///< Total number of drivers.
+    string name;
+    string licenseId;
+    int experienceYears;
 
 public:
-    Driver(int id, std::string name, std::string phone, int numberOfHours); ///< Constructor.
-    ~Driver(); ///< Destructor.
-    Driver(const Driver& other); ///< Copy constructor.
-    Driver& operator=(Driver other); ///< Copy assignment operator.
+    Driver(string n, string l, int e) 
+        : name(n), licenseId(l), experienceYears(e) {}
 
-    friend void swap(Driver& first, Driver& second) noexcept; ///< Swap two drivers.
+    string getName() const { return name; }
+    string getLicenseId() const { return licenseId; }
+    int getExperience() const { return experienceYears; }
 
-    [[nodiscard]] int getId() const; ///< Get driver ID.
-    void updateNumberOfHours(int newNumberOfHours); ///< Update hours worked.
-    void display() const; ///< Display driver details.
-    static int getTotalDrivers(); ///< Get total driver count.
+    void displayInfo() const {
+        cout << "Driver: " << name << " [ID: " << licenseId 
+             << "], Exp: " << experienceYears << " years" << endl;
+    }
 };
 
-#endif // DRIVER_H
+#endif
